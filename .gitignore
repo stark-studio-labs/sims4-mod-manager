@@ -18,7 +18,6 @@ htmlcov/
 # Node / Electron
 node_modules/
 dist/
-build/
 out/
 *.dmg
 *.exe

@@ -5,9 +5,10 @@
 let state = {
   modsPath: null,
   firstRun: true,
+  persona: null,
   availableMods: [],
   installedMods: {},
-  currentView: 'welcome',
+  currentView: 'splash',
   installing: new Set(),
   progress: {}
 };
@@ -85,9 +86,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Route to appropriate view
   if (state.firstRun || !state.modsPath) {
-    showView('welcome');
-    runDetection();
+    showView('splash');
   } else {
+    document.getElementById('view-splash').classList.add('hidden');
     document.getElementById('view-welcome').classList.add('hidden');
     await refreshInstalledMods();
     showView('mods');
@@ -121,6 +122,22 @@ function showView(viewName) {
 
 function refreshCurrentView() {
   showView(state.currentView);
+}
+
+// ── Splash / Persona Picker ────────────────────────────────────────────────
+
+function selectPersona(el) {
+  document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.persona = el.dataset.persona;
+  document.getElementById('btn-splash-start').disabled = false;
+}
+
+async function startFromSplash() {
+  if (!state.persona) return;
+  await api.setSetting('persona', state.persona);
+  showView('welcome');
+  runDetection();
 }
 
 // ── Welcome / Detection ─────────────────────────────────────────────────────

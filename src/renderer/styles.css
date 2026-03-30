@@ -24,6 +24,14 @@
   --warning: #d29922;
   --info: #58a6ff;
 
+  /* Per-layer mod colors */
+  --layer-economy: #2ea043;
+  --layer-social: #e05d44;
+  --layer-qol: #0969da;
+  --layer-drama: #d4a017;
+  --layer-politics: #8957e5;
+  --layer-smart: #1f9ada;
+
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
@@ -903,4 +911,122 @@ html, body {
   gap: 12px;
   padding: 40px;
   color: var(--text-secondary);
+}
+
+/* ── Splash / Onboarding Screen ───────────────────────────────────────── */
+
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  text-align: center;
+  padding: 40px 32px;
+  position: relative;
+}
+
+.splash-banner {
+  width: 100%;
+  max-width: 640px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 32px;
+  box-shadow:
+    0 0 0 1px rgba(74, 222, 128, 0.1),
+    0 0 60px rgba(74, 222, 128, 0.06),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.splash-heading {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--accent) 0%, #a5f3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+.splash-tagline {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+}
+
+.splash-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* ── Persona Picker ───────────────────────────────────────────────────── */
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 580px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.persona-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.persona-card:hover {
+  border-color: var(--accent-border);
+  background: var(--bg-tertiary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.persona-card.selected {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  box-shadow: var(--shadow-glow);
+}
+
+.persona-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.persona-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.persona-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.persona-card.selected .persona-title {
+  color: var(--accent);
+}
+
+.splash-cta {
+  margin-top: 4px;
+}
+
+.splash-cta .btn:disabled {
+  opacity: 0.35;
 }

@@ -68,8 +68,48 @@
     <!-- Content Area -->
     <main class="content" id="content">
 
-      <!-- Welcome View (first run) -->
-      <div class="view" id="view-welcome">
+      <!-- Splash / Onboarding View (first launch) -->
+      <div class="view" id="view-splash">
+        <div class="splash-screen">
+          <img class="splash-banner" src="../../assets/splash-banner.png" alt="Stark Labs Mod Manager" draggable="false">
+          <h1 class="splash-heading">Welcome to Stark Labs</h1>
+          <p class="splash-tagline">The mod manager The Sims 4 has always needed.</p>
+
+          <div class="splash-label">How do you mod?</div>
+          <div class="persona-grid" id="persona-grid">
+            <div class="persona-card" data-persona="beginner" onclick="selectPersona(this)">
+              <div class="persona-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </div>
+              <div class="persona-title">New to Mods</div>
+              <div class="persona-desc">Install everything for me</div>
+            </div>
+            <div class="persona-card" data-persona="intermediate" onclick="selectPersona(this)">
+              <div class="persona-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div class="persona-title">I Know My Way Around</div>
+              <div class="persona-desc">Let me pick and choose</div>
+            </div>
+            <div class="persona-card" data-persona="power" onclick="selectPersona(this)">
+              <div class="persona-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              </div>
+              <div class="persona-title">Power User</div>
+              <div class="persona-desc">Full control, manual config</div>
+            </div>
+          </div>
+
+          <div class="splash-cta">
+            <button class="btn btn-primary btn-lg" id="btn-splash-start" onclick="startFromSplash()" disabled>
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Welcome View (detection step) -->
+      <div class="view hidden" id="view-welcome">
         <div class="welcome-container">
           <div class="welcome-plumbob">
             <svg viewBox="0 0 80 100" width="80" height="100">
