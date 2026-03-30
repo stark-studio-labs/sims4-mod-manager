@@ -138,6 +138,51 @@ npm run pack
 
 ---
 
+## ⚖️ How It Compares
+
+| Feature | Manual (current reality) | Sims 4 Studio | sims4-mod-manager |
+|---------|--------------------------|---------------|-------------------|
+| Conflict detection | None — find out when game crashes | None | ✅ DBPF-level resource key collision scan |
+| Conflict severity | Unknown | Unknown | ✅ High/Medium/Low by resource type |
+| Enable/disable mods | Delete or move files manually | No | ✅ `s4mm disable` — moves to `_disabled/` |
+| Install from ZIP | Unzip manually, drag files | Partial (for S4S assets) | ✅ `s4mm install mod.zip` |
+| Scan mod collection | Open each file manually | Partial | ✅ `s4mm scan` — full table with metadata |
+| Resource count per mod | Unknown | Visible in S4S | ✅ Shown in scan output |
+| CLI workflow | None | None — GUI only | ✅ Full CLI with `--mods-dir` override |
+| Conflict detail | None | None | ✅ Which mods conflict, which resource type |
+| Batch operations | None | None | 📋 Planned |
+| Dependency detection | None | None | 📋 Planned |
+| Auto-update check | None | None | 📋 Planned |
+| CAS / mesh editing | N/A | ✅ Primary feature | ❌ Out of scope |
+
+> **Note:** Sims 4 Studio is the gold standard for asset editing and recoloring. sims4-mod-manager focuses exclusively on script and tuning mod management — conflict detection, install, enable/disable.
+
+---
+
+## 🗺️ Roadmap
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| DBPF v2.0 binary parser | ✅ Shipped | Reads .package index tables at binary level |
+| `s4mm scan` — full collection scan | ✅ Shipped | Rich table output with metadata |
+| `s4mm list` — filtered/sorted listing | ✅ Shipped | Filter by type, sort by name/size/date |
+| `s4mm enable/disable` — toggle mods | ✅ Shipped | Moves to/from `_disabled/` subfolder |
+| `s4mm conflicts` — conflict report | ✅ Shipped | High/Medium/Low severity classification |
+| `s4mm install` — install from ZIP | ✅ Shipped | Extracts and places mod files |
+| `s4mm info` — detailed mod view | ✅ Shipped | Resources, path, size, status |
+| 42 pytest tests | ✅ Shipped | Parser, manager, conflict, CLI coverage |
+| `s4mm status` — quick overview | ✅ Shipped | Active count, total size, conflict summary |
+| Mod profiles — switch mod sets | 🔨 In Progress | Save/restore named sets of enabled mods |
+| Pre-install conflict scan | 📋 Planned | Warn about conflicts before installing |
+| Dependency detection | 📋 Planned | Detect missing XML Injector, S4CL, etc. |
+| Auto-update check | 📋 Planned | Poll mod sources for new versions |
+| Web/TUI dashboard | 📋 Planned | Visual alternative to CLI |
+| CurseForge API integration | 📋 Planned | One-click install from CurseForge |
+| .package write support | ❌ Out of Scope | Read-only — use S4TK or S4S to create |
+| CAS / mesh editing | ❌ Out of Scope | Use Sims 4 Studio |
+
+---
+
 <div align="center">
 
 **Built by [Stark Labs](https://github.com/stark-studio-labs)**
