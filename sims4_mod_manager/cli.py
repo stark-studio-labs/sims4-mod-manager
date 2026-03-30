@@ -18,6 +18,45 @@ from sims4_mod_manager.conflicts import ConflictDetector
 
 console = Console()
 
+VERSION = "0.1.0"
+
+
+def show_welcome(mods_path: Optional[Path] = None) -> None:
+    """Display the branded ASCII welcome screen."""
+    art = Text.from_markup(
+        "[bold green]"
+        "\n"
+        "       [bold white]/\\[/bold white]\n"
+        "      [bold white]/  \\[/bold white]\n"
+        "     [bold white]/    \\[/bold white]\n"
+        "    [bold white]/  [bold green]<>[/bold green]  \\[/bold white]\n"
+        "   [bold white]/        \\[/bold white]\n"
+        "  [bold white]/____||____\\[/bold white]\n"
+        "[/bold green]"
+    )
+
+    welcome = Panel(
+        art,
+        title="[bold green]STARK LABS MOD MANAGER[/bold green]",
+        subtitle=f"[dim]The Sims 4 -- Better, One Mod at a Time[/dim]",
+        border_style="green",
+        padding=(1, 4),
+        width=50,
+    )
+    console.print(welcome)
+    console.print(f"  [dim]Version[/dim]  [bold]{VERSION}[/bold]")
+    if mods_path:
+        console.print(f"  [dim]Mods[/dim]     [bold]{mods_path}[/bold]")
+    else:
+        detected = find_mods_folder()
+        if detected:
+            console.print(f"  [dim]Mods[/dim]     [bold]{detected}[/bold]")
+        else:
+            console.print("  [dim]Mods[/dim]     [yellow]Not detected[/yellow]")
+    console.print()
+
+
+# Legacy banner kept for backwards compatibility
 BANNER = r"""[bold magenta]
  ____  _                _  _    __  __           _
 / ___|(_)_ __ ___  ___ | || |  |  \/  | ___   __| |
@@ -46,21 +85,35 @@ def resolve_mods_path(mods_dir: Optional[str]) -> Path:
     return path
 
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.option("--mods-dir", type=str, default=None, help="Path to Sims 4 Mods folder")
 @click.pass_context
 def cli(ctx: click.Context, mods_dir: Optional[str]) -> None:
     """Sims 4 Mod Manager - manage your mods from the command line."""
     ctx.ensure_object(dict)
     ctx.obj["mods_dir"] = mods_dir
+    if ctx.invoked_subcommand is None:
+        mods_path = Path(mods_dir).expanduser() if mods_dir else None
+        show_welcome(mods_path)
+        console.print("[bold]Commands:[/bold]")
+        console.print("  [green]scan[/green]       Scan mods folder and display all installed mods")
+        console.print("  [green]list[/green]       List mods with filtering and sorting")
+        console.print("  [green]status[/green]     Quick status overview")
+        console.print("  [green]install[/green]    Install mods from a .zip file")
+        console.print("  [green]enable[/green]     Enable a previously disabled mod")
+        console.print("  [green]disable[/green]    Disable a mod")
+        console.print("  [green]info[/green]       Show detailed info about a specific mod")
+        console.print("  [green]conflicts[/green]  Scan for conflicts between mods")
+        console.print()
+        console.print("[dim]Run[/dim] [bold]s4mm <command> --help[/bold] [dim]for details.[/dim]")
 
 
 @cli.command()
 @click.pass_context
 def scan(ctx: click.Context) -> None:
     """Scan the Mods folder and display all installed mods."""
-    console.print(BANNER)
     mods_path = resolve_mods_path(ctx.obj["mods_dir"])
+    show_welcome(mods_path)
     console.print(f"[dim]Scanning:[/dim] {mods_path}\n")
 
     with Progress(
@@ -347,8 +400,8 @@ def info(ctx: click.Context, mod_name: str) -> None:
 @click.pass_context
 def status(ctx: click.Context) -> None:
     """Quick status overview of your mods folder."""
-    console.print(BANNER)
     mods_path = resolve_mods_path(ctx.obj["mods_dir"])
+    show_welcome(mods_path)
 
     scanner = ModScanner(mods_path)
     mods = scanner.scan()
