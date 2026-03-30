@@ -199,10 +199,29 @@ html, body {
 }
 
 .sidebar-version {
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-muted);
-  padding: 8px 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 4px 4px 0;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  border-radius: 100px;
+  background: var(--accent-bg);
+}
+
+.sidebar-version::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  flex-shrink: 0;
 }
 
 /* ── Content Area ──────────────────────────────────────────────────────── */
@@ -451,7 +470,9 @@ html, body {
 }
 
 .mod-card {
-  background: var(--bg-glass);
+  background:
+    linear-gradient(135deg, var(--card-wash, transparent) 0%, transparent 55%),
+    var(--bg-glass);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -466,21 +487,16 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 3px;
+  width: 3px;
+  height: 100%;
   background: var(--card-accent);
-  opacity: 0;
-  transition: var(--transition);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 }
 
 .mod-card:hover {
   border-color: var(--card-accent, var(--border));
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-}
-
-.mod-card:hover::before {
-  opacity: 1;
 }
 
 .mod-card-header {

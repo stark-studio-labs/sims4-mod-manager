@@ -12,15 +12,42 @@ let state = {
   progress: {}
 };
 
-// ── Mod Icons (SVG inline) ──────────────────────────────────────────────────
+// ── SVG Icon Helper ─────────────────────────────────────────────────────────
+
+function appendSVGIcon(container, svgString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svgString, 'image/svg+xml');
+  container.appendChild(doc.documentElement);
+}
+
+// ── Mod Icons (CCO v3 custom SVGs) ─────────────────────────────────────────
+// SVGs sourced from brand/preview/render-v3.html (CCO approved 2026-03-30)
 
 const MOD_ICONS = {
-  'economy-sim': { emoji: '$', bg: 'rgba(46, 160, 67, 0.12)', border: 'rgba(46, 160, 67, 0.3)' },
-  'political-sim': { emoji: '\u2696', bg: 'rgba(139, 92, 246, 0.12)', border: 'rgba(139, 92, 246, 0.3)' },
-  'social-sim': { emoji: '\u{1F4AC}', bg: 'rgba(224, 93, 68, 0.12)', border: 'rgba(224, 93, 68, 0.3)' },
-  'qol-pack': { emoji: '\u26A1', bg: 'rgba(9, 105, 218, 0.12)', border: 'rgba(9, 105, 218, 0.3)' },
-  'drama-engine': { emoji: '\u{1F3AD}', bg: 'rgba(212, 160, 23, 0.12)', border: 'rgba(212, 160, 23, 0.3)' },
-  'smart-sims': { emoji: '\u{1F9E0}', bg: 'rgba(207, 34, 46, 0.12)', border: 'rgba(207, 34, 46, 0.3)' }
+  'economy-sim': {
+    svg: `<svg width="28" height="28" viewBox="0 0 30 30" fill="none"><ellipse cx="15" cy="8" rx="10" ry="4" fill="none" stroke="#2ea043" stroke-width="1.5"/><path d="M5 8 v6 c0 2.2 4.5 4 10 4 s10-1.8 10-4 V8" fill="none" stroke="#2ea043" stroke-width="1.5"/><ellipse cx="15" cy="14" rx="10" ry="4" fill="none" stroke="#2ea043" stroke-width="1.5"/><path d="M5 14 v5 c0 2.2 4.5 4 10 4 s10-1.8 10-4 v-5" fill="none" stroke="#2ea043" stroke-width="1.5"/></svg>`,
+    bg: 'rgba(46, 160, 67, 0.12)', border: 'rgba(46, 160, 67, 0.25)', wash: 'rgba(46, 160, 67, 0.1)'
+  },
+  'political-sim': {
+    svg: `<svg width="28" height="28" viewBox="0 0 30 30" fill="none"><rect x="3" y="24" width="24" height="2.5" rx="1.2" fill="#8957e5" opacity="0.8"/><rect x="6" y="10" width="4" height="14" rx="1" fill="none" stroke="#8957e5" stroke-width="1.5"/><rect x="13" y="7" width="4" height="17" rx="1" fill="none" stroke="#8957e5" stroke-width="1.5"/><rect x="20" y="13" width="4" height="11" rx="1" fill="none" stroke="#8957e5" stroke-width="1.5"/><path d="M3 10 L15 4 L27 10" stroke="#8957e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`,
+    bg: 'rgba(137, 87, 229, 0.12)', border: 'rgba(137, 87, 229, 0.25)', wash: 'rgba(137, 87, 229, 0.1)'
+  },
+  'social-sim': {
+    svg: `<svg width="28" height="28" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="7" r="3.5" stroke="#e05d44" stroke-width="1.5"/><circle cx="6" cy="22" r="3" stroke="#e05d44" stroke-width="1.5"/><circle cx="24" cy="22" r="3" stroke="#e05d44" stroke-width="1.5"/><line x1="15" y1="10.5" x2="8" y2="19.2" stroke="#e05d44" stroke-width="1.2" stroke-opacity="0.7"/><line x1="15" y1="10.5" x2="22" y2="19.2" stroke="#e05d44" stroke-width="1.2" stroke-opacity="0.7"/><line x1="9" y1="22" x2="21" y2="22" stroke="#e05d44" stroke-width="1.2" stroke-opacity="0.5"/></svg>`,
+    bg: 'rgba(224, 93, 68, 0.12)', border: 'rgba(224, 93, 68, 0.25)', wash: 'rgba(224, 93, 68, 0.1)'
+  },
+  'qol-pack': {
+    svg: `<svg width="28" height="28" viewBox="0 0 30 30" fill="none"><line x1="4" y1="9" x2="26" y2="9" stroke="#388bfd" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="15" x2="26" y2="15" stroke="#388bfd" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="21" x2="26" y2="21" stroke="#388bfd" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="9" r="3" fill="#0d1117" stroke="#388bfd" stroke-width="1.5"/><circle cx="20" cy="15" r="3" fill="#0d1117" stroke="#388bfd" stroke-width="1.5"/><circle cx="13" cy="21" r="3" fill="#0d1117" stroke="#388bfd" stroke-width="1.5"/></svg>`,
+    bg: 'rgba(56, 139, 253, 0.12)', border: 'rgba(56, 139, 253, 0.25)', wash: 'rgba(56, 139, 253, 0.1)'
+  },
+  'drama-engine': {
+    svg: `<svg width="28" height="28" viewBox="0 0 30 30" fill="none"><path d="M3 22 C6 22 7 10 10 10 C13 10 14 18 17 18 C20 18 21 8 24 6 C26 5 27 8 27 8" stroke="#d4a017" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="24" cy="6" r="2.5" fill="#d4a017" opacity="0.9"/></svg>`,
+    bg: 'rgba(212, 160, 23, 0.12)', border: 'rgba(212, 160, 23, 0.25)', wash: 'rgba(212, 160, 23, 0.1)'
+  },
+  'smart-sims': {
+    svg: `<svg width="28" height="28" viewBox="0 0 30 30" fill="none"><circle cx="5" cy="10" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/><circle cx="5" cy="20" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/><circle cx="15" cy="7" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/><circle cx="15" cy="15" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/><circle cx="15" cy="23" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/><circle cx="25" cy="15" r="2.5" fill="#1f9ada" opacity="0.9"/><line x1="7.5" y1="10" x2="12.5" y2="7" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/><line x1="7.5" y1="10" x2="12.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/><line x1="7.5" y1="10" x2="12.5" y2="23" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.3"/><line x1="7.5" y1="20" x2="12.5" y2="7" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.3"/><line x1="7.5" y1="20" x2="12.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/><line x1="7.5" y1="20" x2="12.5" y2="23" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/><line x1="17.5" y1="7" x2="22.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.6"/><line x1="17.5" y1="15" x2="22.5" y2="15" stroke="#1f9ada" stroke-width="1.5" stroke-opacity="0.8"/><line x1="17.5" y1="23" x2="22.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.6"/></svg>`,
+    bg: 'rgba(31, 154, 218, 0.12)', border: 'rgba(31, 154, 218, 0.25)', wash: 'rgba(31, 154, 218, 0.1)'
+  }
 };
 
 // ── Initialize ──────────────────────────────────────────────────────────────
@@ -179,11 +206,12 @@ function renderModGrid() {
   state.availableMods.forEach(mod => {
     const installed = state.installedMods[mod.id];
     const isInstalling = state.installing.has(mod.id);
-    const icon = MOD_ICONS[mod.id] || { emoji: '\u{1F4E6}', bg: 'rgba(255,255,255,0.05)', border: 'rgba(255,255,255,0.1)' };
+    const icon = MOD_ICONS[mod.id] || { bg: 'rgba(255,255,255,0.05)', border: 'rgba(255,255,255,0.1)', wash: 'transparent' };
 
     const card = document.createElement('div');
     card.className = 'mod-card';
     card.style.setProperty('--card-accent', mod.color);
+    card.style.setProperty('--card-wash', icon.wash || 'transparent');
 
     // Header
     const header = document.createElement('div');
@@ -193,7 +221,7 @@ function renderModGrid() {
     iconEl.className = 'mod-card-icon';
     iconEl.style.background = icon.bg;
     iconEl.style.border = `1px solid ${icon.border}`;
-    iconEl.textContent = icon.emoji;
+    if (icon.svg) appendSVGIcon(iconEl, icon.svg);
 
     const titleGroup = document.createElement('div');
     titleGroup.className = 'mod-card-title-group';
@@ -386,7 +414,7 @@ function renderInstalledList() {
   }
 
   installed.forEach(mod => {
-    const icon = MOD_ICONS[mod.id] || { emoji: '\u{1F4E6}', bg: 'rgba(255,255,255,0.05)', border: 'rgba(255,255,255,0.1)' };
+    const icon = MOD_ICONS[mod.id] || { bg: 'rgba(255,255,255,0.05)', border: 'rgba(255,255,255,0.1)' };
 
     const item = document.createElement('div');
     item.className = 'installed-item';
@@ -396,7 +424,7 @@ function renderInstalledList() {
     itemIcon.style.background = icon.bg;
     itemIcon.style.border = `1px solid ${icon.border}`;
     itemIcon.style.borderRadius = '8px';
-    itemIcon.textContent = icon.emoji;
+    if (icon.svg) appendSVGIcon(itemIcon, icon.svg);
 
     const info = document.createElement('div');
     info.className = 'installed-item-info';
