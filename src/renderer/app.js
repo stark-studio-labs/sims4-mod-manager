@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const settings = await api.getAllSettings();
   state.modsPath = settings.modsPath;
   state.firstRun = settings.firstRun;
+  state.persona = settings.persona || localStorage.getItem('starkLabsPersona') || null;
 
   // Set version
   const version = await api.getVersion();
@@ -136,6 +137,7 @@ function selectPersona(el) {
 async function startFromSplash() {
   if (!state.persona) return;
   await api.setSetting('persona', state.persona);
+  localStorage.setItem('starkLabsPersona', state.persona);
   showView('welcome');
   runDetection();
 }
@@ -562,12 +564,46 @@ async function checkUpdates() {
   }
 }
 
+// ── FAQ Accordion ───────────────────────────────────────────────────────────
+
+function toggleFaq(button) {
+  const item = button.parentElement;
+  const isOpen = item.classList.contains('open');
+
+  // Close all items
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+  // Toggle the clicked one
+  if (!isOpen) {
+    item.classList.add('open');
+  }
+}
+
 // ── Settings ────────────────────────────────────────────────────────────────
 
 function refreshSettings() {
   if (state.modsPath) {
     document.getElementById('settings-mods-path').textContent = state.modsPath;
   }
+
+  // Update persona selector active state
+  const currentPersona = state.persona || localStorage.getItem('starkLabsPersona');
+  document.querySelectorAll('.persona-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.persona === currentPersona);
+  });
+}
+
+async function setPersona(persona) {
+  state.persona = persona;
+  localStorage.setItem('starkLabsPersona', persona);
+  await api.setSetting('persona', persona);
+
+  // Update UI
+  document.querySelectorAll('.persona-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.persona === persona);
+  });
+
+  showToast(`Experience level set to ${persona === 'beginner' ? 'Casual' : persona === 'intermediate' ? 'Standard' : 'Power User'}`, 'success');
 }
 
 async function changeModsPath() {
@@ -589,12 +625,12 @@ async function enableScripts() {
   const result = await api.enableScriptMods(state.modsPath);
   if (result.success) {
     if (result.alreadyEnabled) {
-      showToast('Script mods already enabled!', 'info');
+      showToast('Mod support already enabled!', 'info');
     } else {
-      showToast('Script mods enabled in Options.ini', 'success');
+      showToast('Mod support enabled in Options.ini', 'success');
     }
   } else {
-    showToast(result.error || 'Failed to enable script mods', 'error');
+    showToast(result.error || 'Failed to enable mod support', 'error');
   }
 }
 

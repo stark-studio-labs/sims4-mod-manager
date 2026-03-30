@@ -44,8 +44,8 @@
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-section">
         <button class="nav-btn active" data-view="mods" onclick="showView('mods')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          <span>Mods</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
         </button>
         <button class="nav-btn" data-view="installed" onclick="showView('installed')">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
@@ -54,6 +54,17 @@
         <button class="nav-btn" data-view="updates" onclick="showView('updates')">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v10m0 0l-4-4m4 4l4-4"/><path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
           <span>Updates</span>
+        </button>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <button class="nav-btn" data-view="docs" onclick="showView('docs')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          <span>Docs</span>
+        </button>
+        <button class="nav-btn" data-view="faq" onclick="showView('faq')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>FAQ</span>
         </button>
       </div>
       <div class="sidebar-section sidebar-bottom">
@@ -197,6 +208,150 @@
         </div>
       </div>
 
+      <!-- Docs View -->
+      <div class="view hidden" id="view-docs">
+        <div class="view-header">
+          <div>
+            <h2 class="view-title">Documentation</h2>
+            <p class="view-subtitle">Everything you need to get started with Stark Labs mods</p>
+          </div>
+        </div>
+        <div class="docs-content">
+          <!-- Getting Started -->
+          <div class="docs-section">
+            <h3 class="docs-section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Getting Started
+            </h3>
+            <div class="docs-steps">
+              <div class="docs-step">
+                <div class="docs-step-number">1</div>
+                <div class="docs-step-content">
+                  <div class="docs-step-title">Install Mods</div>
+                  <div class="docs-step-desc">Head to the <a href="#" onclick="showView('mods'); return false;">Home</a> tab and click <strong>Install</strong> on any mod you want. The app handles downloading, extracting, and placing files in your Mods folder automatically.</div>
+                </div>
+              </div>
+              <div class="docs-step">
+                <div class="docs-step-number">2</div>
+                <div class="docs-step-content">
+                  <div class="docs-step-title">Launch The Sims 4</div>
+                  <div class="docs-step-desc">Start your game normally through EA App or Steam. On the main menu, you should see a notification that mods are loaded. If prompted, accept the mod/CC warning.</div>
+                </div>
+              </div>
+              <div class="docs-step">
+                <div class="docs-step-number">3</div>
+                <div class="docs-step-content">
+                  <div class="docs-step-title">Verify It Works</div>
+                  <div class="docs-step-desc">Load a save and check that your mod features appear in-game. If something is off, visit the <a href="#" onclick="showView('faq'); return false;">FAQ</a> or check the troubleshooting section below.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Troubleshooting -->
+          <div class="docs-section">
+            <h3 class="docs-section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Troubleshooting
+            </h3>
+            <div class="docs-tips">
+              <div class="docs-tip">
+                <div class="docs-tip-title">Mods not showing in-game?</div>
+                <div class="docs-tip-desc">Go to <strong>Settings</strong> and click <strong>Enable</strong> next to "Enable Mod Support". This turns on script mods in your game's Options.ini file. Restart your game after enabling.</div>
+              </div>
+              <div class="docs-tip">
+                <div class="docs-tip-title">Game crashes on load?</div>
+                <div class="docs-tip-desc">Try disabling mods one-by-one using the <a href="#" onclick="showView('installed'); return false;">Installed</a> tab. If a specific mod causes the crash, uninstall it and check for updates.</div>
+              </div>
+              <div class="docs-tip">
+                <div class="docs-tip-title">Mods folder not detected?</div>
+                <div class="docs-tip-desc">Go to <strong>Settings</strong> and click <strong>Change</strong> next to the Mods Folder path. Manually select the folder at: <code>Documents/Electronic Arts/The Sims 4/Mods</code></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full Docs Link -->
+          <div class="docs-section docs-link-section">
+            <div class="docs-link-card" onclick="api.openExternal('https://stark-studio-labs.github.io/docs.html')">
+              <div class="docs-link-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </div>
+              <div class="docs-link-text">
+                <div class="docs-link-title">Full Documentation</div>
+                <div class="docs-link-desc">Visit stark-studio-labs.github.io for complete guides, API reference, and mod development docs.</div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ View -->
+      <div class="view hidden" id="view-faq">
+        <div class="view-header">
+          <div>
+            <h2 class="view-title">Frequently Asked Questions</h2>
+            <p class="view-subtitle">Quick answers to common questions</p>
+          </div>
+        </div>
+        <div class="faq-list" id="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What are script mods?</span>
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Script mods are Python-based modifications that add new gameplay behaviors to The Sims 4. Unlike regular mods that only change data (like outfits or objects), script mods can create entirely new systems like economics, social dynamics, or AI behaviors. They need to be enabled in your game's settings to work -- the Stark Labs Mod Manager handles this for you automatically.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Will this break my save?</span>
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>No. Stark Labs mods are designed to be safely installed and removed at any time. They do not permanently modify your save data. If you uninstall a mod, your game will simply revert to its normal behavior. As a best practice, we still recommend keeping a backup of your save files, but you should not experience any corruption.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How do I uninstall a mod?</span>
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Easy -- just go to the <strong>Home</strong> tab or the <strong>Installed</strong> tab and click the <strong>Uninstall</strong> button next to the mod you want to remove. The app will delete the mod files from your Mods folder. Restart your game for the changes to take effect.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Do I need to pay?</span>
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>All core Stark Labs mods are free to download and use. Some premium features and early-access content may be available through our Patreon. Supporting us on Patreon helps fund ongoing development, but it is never required to enjoy the mods.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How do I update mods?</span>
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>The app checks for mod updates automatically when you launch it. You can also manually check by going to the <strong>Updates</strong> tab and clicking <strong>Check Now</strong>. When an update is available, you will see the new version and a button to view the release notes. Re-installing the mod will get you the latest version.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Can I use multiple mods at the same time?</span>
+              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! All Stark Labs mods are designed to work together. They share a common framework that prevents conflicts. You can install as many as you like and they will integrate seamlessly with each other and your game.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Settings View -->
       <div class="view hidden" id="view-settings">
         <div class="view-header">
@@ -214,12 +369,40 @@
             </div>
             <div class="setting-row">
               <div class="setting-info">
-                <span class="setting-label">Script Mods</span>
-                <span class="setting-desc">Enable script mods in Options.ini</span>
+                <span class="setting-label">Enable Mod Support</span>
+                <span class="setting-desc">Allows gameplay mods to run in The Sims 4. Required for all Stark Labs mods.</span>
               </div>
               <button class="btn btn-secondary btn-sm" onclick="enableScripts()">Enable</button>
             </div>
           </div>
+
+          <div class="settings-group">
+            <h3 class="settings-group-title">Experience Level</h3>
+            <div class="setting-row setting-row-block">
+              <div class="setting-info" style="margin-bottom: 12px;">
+                <span class="setting-label">Choose your comfort level</span>
+                <span class="setting-desc">This affects which tips and guidance the app shows you. Change it anytime.</span>
+              </div>
+              <div class="persona-selector" id="persona-selector">
+                <button class="persona-option" data-persona="beginner" onclick="setPersona('beginner')">
+                  <span class="persona-option-icon" aria-hidden="true">&#x1F331;</span>
+                  <span class="persona-option-label">Casual</span>
+                  <span class="persona-option-desc">Show me the basics</span>
+                </button>
+                <button class="persona-option" data-persona="intermediate" onclick="setPersona('intermediate')">
+                  <span class="persona-option-icon" aria-hidden="true">&#x1F33F;</span>
+                  <span class="persona-option-label">Standard</span>
+                  <span class="persona-option-desc">I know what I'm doing</span>
+                </button>
+                <button class="persona-option" data-persona="power" onclick="setPersona('power')">
+                  <span class="persona-option-icon" aria-hidden="true">&#x1F333;</span>
+                  <span class="persona-option-label">Power User</span>
+                  <span class="persona-option-desc">Give me everything</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div class="settings-group">
             <h3 class="settings-group-title">App</h3>
             <div class="setting-row">
@@ -233,6 +416,7 @@
               </label>
             </div>
           </div>
+
           <div class="settings-group">
             <h3 class="settings-group-title">About</h3>
             <div class="setting-row">

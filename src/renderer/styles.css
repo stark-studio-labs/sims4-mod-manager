@@ -7,6 +7,7 @@
   --bg-tertiary: #1c2128;
   --bg-elevated: #21262d;
   --bg-glass: rgba(22, 27, 34, 0.75);
+  --bg-sidebar: #0a0e14;
 
   --border: rgba(48, 54, 61, 0.7);
   --border-light: rgba(48, 54, 61, 0.4);
@@ -156,7 +157,7 @@ html, body {
 
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--bg-secondary);
+  background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -168,6 +169,12 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 8px 12px;
 }
 
 .sidebar-bottom {
@@ -727,6 +734,11 @@ html, body {
   border-top: 1px solid var(--border-light);
 }
 
+.setting-row-block {
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .setting-info {
   display: flex;
   flex-direction: column;
@@ -742,6 +754,60 @@ html, body {
 .setting-desc {
   font-size: 12px;
   color: var(--text-muted);
+}
+
+/* ── Persona Selector (Settings) ─────────────────────────────────────── */
+
+.persona-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.persona-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.persona-option:hover {
+  border-color: var(--accent-border);
+  background: var(--bg-tertiary);
+}
+
+.persona-option.active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  box-shadow: var(--shadow-glow);
+}
+
+.persona-option-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.persona-option-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.persona-option.active .persona-option-label {
+  color: var(--accent);
+}
+
+.persona-option-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.3;
 }
 
 /* ── Toggle Switch ─────────────────────────────────────────────────────── */
@@ -887,6 +953,271 @@ html, body {
   font-weight: 600;
 }
 
+/* ── Docs View ─────────────────────────────────────────────────────────── */
+
+.docs-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.docs-section {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.docs-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+/* Steps */
+
+.docs-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.docs-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.docs-step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.docs-step-content {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.docs-step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.docs-step-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.docs-step-desc a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.docs-step-desc a:hover {
+  text-decoration: underline;
+}
+
+.docs-step-desc strong {
+  color: var(--text-primary);
+}
+
+/* Tips */
+
+.docs-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.docs-tip {
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.docs-tip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.docs-tip-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.docs-tip-desc a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.docs-tip-desc a:hover {
+  text-decoration: underline;
+}
+
+.docs-tip-desc strong {
+  color: var(--text-primary);
+}
+
+.docs-tip-desc code {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 11px;
+  background: var(--bg-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+/* Link card */
+
+.docs-link-section {
+  padding: 0;
+  overflow: hidden;
+}
+
+.docs-link-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.docs-link-card:hover {
+  background: var(--bg-tertiary);
+}
+
+.docs-link-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.docs-link-text {
+  flex: 1;
+}
+
+.docs-link-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.docs-link-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── FAQ View ──────────────────────────────────────────────────────────── */
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.faq-item:hover {
+  border-color: var(--border-light);
+}
+
+.faq-item.open {
+  border-color: var(--accent-border);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.faq-question:hover {
+  color: var(--accent);
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+  color: var(--text-muted);
+}
+
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease, padding 300ms ease;
+  padding: 0 20px;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 300px;
+  padding: 0 20px 16px;
+}
+
+.faq-answer p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.faq-answer strong {
+  color: var(--text-primary);
+}
+
 /* ── Scrollbar ─────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar { width: 6px; }
@@ -963,7 +1294,7 @@ html, body {
   margin-bottom: 16px;
 }
 
-/* ── Persona Picker ───────────────────────────────────────────────────── */
+/* ── Persona Picker (Splash) ─────────────────────────────────────────── */
 
 .persona-grid {
   display: grid;
