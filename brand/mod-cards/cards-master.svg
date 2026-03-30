@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 160" width="1400" height="160">
+  <!-- 6 mod cards in one reference sheet, each 200×120 with 20px gaps, centered vertically in 160px -->
+  <!-- Card Y offset: 20px top padding -->
+
+  <defs>
+    <!-- Economy: Green -->
+    <linearGradient id="economy-wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2ea043" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#2ea043" stop-opacity="0.04"/>
+    </linearGradient>
+    <!-- Social: Coral/Red -->
+    <linearGradient id="social-wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e05d44" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#e05d44" stop-opacity="0.04"/>
+    </linearGradient>
+    <!-- QoL: Blue -->
+    <linearGradient id="qol-wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0969da" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#0969da" stop-opacity="0.04"/>
+    </linearGradient>
+    <!-- Drama: Amber -->
+    <linearGradient id="drama-wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a017" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#d4a017" stop-opacity="0.04"/>
+    </linearGradient>
+    <!-- Politics: Purple -->
+    <linearGradient id="politics-wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8957e5" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#8957e5" stop-opacity="0.04"/>
+    </linearGradient>
+    <!-- Smart Sims: Teal -->
+    <linearGradient id="smart-wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f9ada" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#1f9ada" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── Card 1: Economy Sim ── x=0 -->
+  <g transform="translate(0, 20)">
+    <rect width="200" height="120" rx="10" fill="#161b22"/>
+    <rect width="200" height="120" rx="10" fill="url(#economy-wash)"/>
+    <rect width="200" height="120" rx="10" fill="none" stroke="#2ea043" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="100" y="68" font-size="40" text-anchor="middle" dominant-baseline="middle">💰</text>
+    <text x="12" y="104" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#e6edf3">Economy Sim</text>
+    <text x="188" y="16" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" fill="#484f58" text-anchor="end">STARK LABS</text>
+    <rect x="0" y="0" width="3" height="120" rx="1.5" fill="#2ea043"/>
+  </g>
+
+  <!-- ── Card 2: Social Sim ── x=220 -->
+  <g transform="translate(220, 20)">
+    <rect width="200" height="120" rx="10" fill="#161b22"/>
+    <rect width="200" height="120" rx="10" fill="url(#social-wash)"/>
+    <rect width="200" height="120" rx="10" fill="none" stroke="#e05d44" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="100" y="68" font-size="40" text-anchor="middle" dominant-baseline="middle">💬</text>
+    <text x="12" y="104" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#e6edf3">Social Sim</text>
+    <text x="188" y="16" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" fill="#484f58" text-anchor="end">STARK LABS</text>
+    <rect x="0" y="0" width="3" height="120" rx="1.5" fill="#e05d44"/>
+  </g>
+
+  <!-- ── Card 3: QoL Pack ── x=440 -->
+  <g transform="translate(440, 20)">
+    <rect width="200" height="120" rx="10" fill="#161b22"/>
+    <rect width="200" height="120" rx="10" fill="url(#qol-wash)"/>
+    <rect width="200" height="120" rx="10" fill="none" stroke="#0969da" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="100" y="68" font-size="40" text-anchor="middle" dominant-baseline="middle">⚡</text>
+    <text x="12" y="104" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#e6edf3">QoL Pack</text>
+    <text x="188" y="16" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" fill="#484f58" text-anchor="end">STARK LABS</text>
+    <rect x="0" y="0" width="3" height="120" rx="1.5" fill="#0969da"/>
+  </g>
+
+  <!-- ── Card 4: Drama Engine ── x=660 -->
+  <g transform="translate(660, 20)">
+    <rect width="200" height="120" rx="10" fill="#161b22"/>
+    <rect width="200" height="120" rx="10" fill="url(#drama-wash)"/>
+    <rect width="200" height="120" rx="10" fill="none" stroke="#d4a017" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="100" y="68" font-size="40" text-anchor="middle" dominant-baseline="middle">🎭</text>
+    <text x="12" y="104" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#e6edf3">Drama Engine</text>
+    <text x="188" y="16" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" fill="#484f58" text-anchor="end">STARK LABS</text>
+    <rect x="0" y="0" width="3" height="120" rx="1.5" fill="#d4a017"/>
+  </g>
+
+  <!-- ── Card 5: Political Sim ── x=880 -->
+  <g transform="translate(880, 20)">
+    <rect width="200" height="120" rx="10" fill="#161b22"/>
+    <rect width="200" height="120" rx="10" fill="url(#politics-wash)"/>
+    <rect width="200" height="120" rx="10" fill="none" stroke="#8957e5" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="100" y="68" font-size="40" text-anchor="middle" dominant-baseline="middle">🏛️</text>
+    <text x="12" y="104" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#e6edf3">Political Sim</text>
+    <text x="188" y="16" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" fill="#484f58" text-anchor="end">STARK LABS</text>
+    <rect x="0" y="0" width="3" height="120" rx="1.5" fill="#8957e5"/>
+  </g>
+
+  <!-- ── Card 6: Smart Sims ── x=1100 -->
+  <g transform="translate(1100, 20)">
+    <rect width="200" height="120" rx="10" fill="#161b22"/>
+    <rect width="200" height="120" rx="10" fill="url(#smart-wash)"/>
+    <rect width="200" height="120" rx="10" fill="none" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="100" y="68" font-size="40" text-anchor="middle" dominant-baseline="middle">🧠</text>
+    <text x="12" y="104" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#e6edf3">Smart Sims</text>
+    <text x="188" y="16" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" fill="#484f58" text-anchor="end">STARK LABS</text>
+    <rect x="0" y="0" width="3" height="120" rx="1.5" fill="#1f9ada"/>
+  </g>
+</svg>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stark Labs Brand Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2128;
+    --bg4: #21262d;
+    --border: rgba(48,54,61,0.7);
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --dim: #484f58;
+    --green: #4ade80;
+    --green-dim: #22c55e;
+    --green-bg: rgba(74,222,128,0.08);
+    --green-border: rgba(74,222,128,0.25);
+  }
+
+  body {
+    background: #060a0f;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .label {
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* ── SECTION 1: App Icon ─────────────────────────────────── */
+  #icon-section {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+  }
+
+  .icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon-wrap span {
+    color: var(--dim);
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .app-icon {
+    background: var(--bg);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 22.4%; /* Apple icon ratio */
+    border: 1px solid var(--green-border);
+    box-shadow:
+      0 0 0 1px rgba(74,222,128,0.1),
+      0 0 40px rgba(74,222,128,0.15),
+      0 20px 60px rgba(0,0,0,0.7),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .app-icon .glow-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 55%, rgba(74,222,128,0.18) 0%, transparent 65%);
+  }
+
+  .plumbob {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* SVG Plumbob — crisp, refined */
+  .plumbob svg { display: block; }
+
+  .monogram {
+    position: absolute;
+    z-index: 3;
+    color: rgba(230,237,243,0.9);
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  /* ── SECTION 2: Splash Banner ───────────────────────────── */
+  #splash {
+    width: 800px;
+    height: 320px;
+    background: var(--bg);
+    border-radius: 16px;
+    border: 1px solid var(--green-border);
+    box-shadow:
+      0 0 0 1px rgba(74,222,128,0.08),
+      0 0 60px rgba(74,222,128,0.08),
+      0 32px 80px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 48px 56px;
+    gap: 48px;
+  }
+
+  #splash .bg-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(74,222,128,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  #splash .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  #splash .accent-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green) 0%, transparent 60%);
+    opacity: 0.7;
+  }
+
+  #splash .icon-zone {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  #splash .text-zone {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #splash .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--green);
+    opacity: 0.9;
+  }
+
+  #splash .product-name {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  #splash .tagline {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+
+  #splash .edition-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border: 1px solid var(--green-border);
+    border-radius: 100px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: fit-content;
+    margin-top: 8px;
+    box-shadow: 0 0 12px rgba(74,222,128,0.1);
+  }
+
+  #splash .edition-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+  }
+
+  /* ── SECTION 3: Mod Cards ───────────────────────────────── */
+  #mod-cards {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .mod-card {
+    width: 200px;
+    height: 120px;
+    background: var(--bg2);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    cursor: default;
+    transition: all 200ms ease;
+  }
+
+  .mod-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .mod-card .card-glow {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 1;
+    pointer-events: none;
+    border-radius: 12px;
+  }
+
+  .mod-card .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+  }
+
+  .mod-card .bottom-row {
+    position: relative;
+    z-index: 2;
+  }
+
+  .mod-card .label-tag {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .mod-card .mod-emoji {
+    font-size: 32px;
+    line-height: 1;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  }
+
+  .mod-card .mod-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .mod-card .mod-desc {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* Economy */
+  .card-economy::before { background: #2ea043; }
+  .card-economy .card-glow { background: linear-gradient(135deg, rgba(46,160,67,0.14) 0%, transparent 60%); }
+  .card-economy .mod-name { color: #e6edf3; }
+
+  /* Social */
+  .card-social::before { background: #e05d44; }
+  .card-social .card-glow { background: linear-gradient(135deg, rgba(224,93,68,0.14) 0%, transparent 60%); }
+
+  /* QoL */
+  .card-qol::before { background: #388bfd; }
+  .card-qol .card-glow { background: linear-gradient(135deg, rgba(56,139,253,0.14) 0%, transparent 60%); }
+
+  /* Drama */
+  .card-drama::before { background: #d4a017; }
+  .card-drama .card-glow { background: linear-gradient(135deg, rgba(212,160,23,0.14) 0%, transparent 60%); }
+
+  /* Politics */
+  .card-politics::before { background: #8957e5; }
+  .card-politics .card-glow { background: linear-gradient(135deg, rgba(137,87,229,0.14) 0%, transparent 60%); }
+
+  /* Smart */
+  .card-smart::before { background: #1f9ada; }
+  .card-smart .card-glow { background: linear-gradient(135deg, rgba(31,154,218,0.14) 0%, transparent 60%); }
+
+  /* ── SECTION 4: DMG Background ────────────────────────── */
+  #dmg {
+    width: 660px;
+    height: 400px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  }
+
+  #dmg .dmg-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(74,222,128,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  #dmg .dmg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.025) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  #dmg .dmg-watermark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  #dmg .dmg-top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0.5;
+  }
+
+  #dmg .dmg-bottom {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  #dmg .dmg-app-zone, #dmg .dmg-apps-zone {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #dmg .dmg-icon-bg {
+    width: 128px;
+    height: 128px;
+    background: var(--bg2);
+    border-radius: 28px;
+    border: 1px solid var(--green-border);
+    box-shadow:
+      0 0 32px rgba(74,222,128,0.12),
+      0 16px 40px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #dmg .dmg-icon-bg .glow-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(74,222,128,0.2) 0%, transparent 65%);
+  }
+
+  #dmg .dmg-folder {
+    width: 96px;
+    height: 80px;
+    position: relative;
+  }
+
+  #dmg .dmg-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+
+  #dmg .dmg-arrow {
+    position: relative;
+    z-index: 2;
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 24px;
+  }
+
+  /* ── SECTION 5: NSIS Sidebar ──────────────────────────── */
+  #nsis-sidebar {
+    width: 164px;
+    height: 314px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 24px;
+    gap: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  #nsis-sidebar .side-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(74,222,128,0.14) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  #nsis-sidebar .side-strip {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--green) 0%, var(--green-dim) 60%, transparent 100%);
+    opacity: 0.85;
+  }
+
+  #nsis-sidebar .side-wordmark {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--text);
+    margin-top: 20px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+
+  #nsis-sidebar .side-sub {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    position: relative;
+    z-index: 2;
+  }
+
+  #nsis-sidebar .side-divider {
+    width: 80%;
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  #nsis-sidebar .side-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    border: 1px solid var(--green-border);
+    border-radius: 100px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+
+  /* ── SECTION 6: NSIS Header ───────────────────────────── */
+  #nsis-header {
+    width: 497px;
+    height: 58px;
+    background: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  #nsis-header .header-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--green), transparent 50%);
+    opacity: 0.7;
+  }
+
+  #nsis-header .header-text {
+    flex: 1;
+  }
+
+  #nsis-header .header-brand {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+
+  #nsis-header .header-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+
+  #nsis-header .header-version {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Section 1: App Icon ── -->
+<div>
+  <div class="label">App Icon</div>
+  <div id="icon-section">
+    <!-- 512px -->
+    <div class="icon-wrap">
+      <div class="app-icon" style="width:512px;height:512px;">
+        <div class="glow-bg"></div>
+        <div class="plumbob" style="position:relative;z-index:2;">
+          <svg width="320" height="320" viewBox="0 0 320 320">
+            <defs>
+              <linearGradient id="f-tl" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2a3a2c"/>
+                <stop offset="100%" stop-color="#1a2020"/>
+              </linearGradient>
+              <linearGradient id="f-tr" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#252d28"/>
+                <stop offset="100%" stop-color="#171d1a"/>
+              </linearGradient>
+              <linearGradient id="f-bl" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#0d1117"/>
+                <stop offset="100%" stop-color="#161b22"/>
+              </linearGradient>
+              <linearGradient id="f-br" x1="1" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#0a0e12"/>
+                <stop offset="100%" stop-color="#161b22"/>
+              </linearGradient>
+              <filter id="gem-glow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+              <filter id="edge-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- Diamond: apex=160,20 left=20,168 bottom=160,304 right=300,168 center=160,168 -->
+            <!-- Top-left facet -->
+            <polygon points="160,20 20,168 160,165" fill="url(#f-tl)"/>
+            <!-- Top-right facet -->
+            <polygon points="160,20 160,165 300,168" fill="url(#f-tr)"/>
+            <!-- Bottom-left facet -->
+            <polygon points="20,168 160,165 160,304" fill="url(#f-bl)"/>
+            <!-- Bottom-right facet -->
+            <polygon points="160,165 300,168 160,304" fill="url(#f-br)"/>
+            <!-- Edge glow outline -->
+            <polygon points="160,20 20,168 160,304 300,168"
+              fill="none" stroke="#4ade80" stroke-width="2" stroke-linejoin="round"
+              opacity="0.9" filter="url(#edge-glow)"/>
+            <!-- Inner facet lines -->
+            <line x1="160" y1="20" x2="160" y2="165" stroke="#4ade80" stroke-width="0.8" opacity="0.3"/>
+            <line x1="20" y1="168" x2="300" y2="168" stroke="#4ade80" stroke-width="0.8" opacity="0.2"/>
+            <!-- Center gem highlight -->
+            <ellipse cx="160" cy="166" rx="12" ry="8" fill="#4ade80" opacity="0.15" filter="url(#gem-glow)"/>
+            <ellipse cx="160" cy="166" rx="5" ry="3.5" fill="#4ade80" opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="monogram" style="font-size:52px;top:50%;left:50%;transform:translate(-50%, 2%);">SL</div>
+      </div>
+      <span>512px</span>
+    </div>
+    <!-- 128px -->
+    <div class="icon-wrap">
+      <div class="app-icon" style="width:128px;height:128px;">
+        <div class="glow-bg"></div>
+        <div class="plumbob" style="position:relative;z-index:2;">
+          <svg width="80" height="80" viewBox="0 0 320 320">
+            <polygon points="160,20 20,168 160,165" fill="#1f2d21"/>
+            <polygon points="160,20 160,165 300,168" fill="#1a2520"/>
+            <polygon points="20,168 160,165 160,304" fill="#0d1117"/>
+            <polygon points="160,165 300,168 160,304" fill="#0a0e12"/>
+            <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="3" stroke-linejoin="round" opacity="0.85"/>
+            <ellipse cx="160" cy="166" rx="5" ry="3.5" fill="#4ade80" opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="monogram" style="font-size:14px;top:50%;left:50%;transform:translate(-50%, 5%);">SL</div>
+      </div>
+      <span>128px</span>
+    </div>
+    <!-- 32px -->
+    <div class="icon-wrap">
+      <div class="app-icon" style="width:32px;height:32px;">
+        <div class="glow-bg"></div>
+        <svg width="20" height="20" viewBox="0 0 320 320" style="position:relative;z-index:2;">
+          <polygon points="160,20 20,168 160,165" fill="#1f2d21"/>
+          <polygon points="160,20 160,165 300,168" fill="#1a2520"/>
+          <polygon points="20,168 160,165 160,304" fill="#0d1117"/>
+          <polygon points="160,165 300,168 160,304" fill="#0a0e12"/>
+          <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="5" opacity="0.9"/>
+        </svg>
+      </div>
+      <span>32px</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Section 2: Splash Banner ── -->
+<div>
+  <div class="label">Splash / Welcome Screen Banner</div>
+  <div id="splash">
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+    <div class="accent-bar"></div>
+
+    <div class="icon-zone">
+      <div class="app-icon" style="width:160px;height:160px;">
+        <div class="glow-bg"></div>
+        <div class="plumbob" style="position:relative;z-index:2;">
+          <svg width="100" height="100" viewBox="0 0 320 320">
+            <polygon points="160,20 20,168 160,165" fill="#1f2d21"/>
+            <polygon points="160,20 160,165 300,168" fill="#1a2520"/>
+            <polygon points="20,168 160,165 160,304" fill="#0d1117"/>
+            <polygon points="160,165 300,168 160,304" fill="#0a0e12"/>
+            <defs>
+              <filter id="sp-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="8" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="3" stroke-linejoin="round" opacity="0.9" filter="url(#sp-glow)"/>
+            <line x1="160" y1="20" x2="160" y2="165" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+            <line x1="20" y1="168" x2="300" y2="168" stroke="#4ade80" stroke-width="1" opacity="0.2"/>
+            <ellipse cx="160" cy="166" rx="7" ry="5" fill="#4ade80" opacity="0.75"/>
+          </svg>
+        </div>
+        <div class="monogram" style="font-size:18px;top:50%;left:50%;transform:translate(-50%, 4%);">SL</div>
+      </div>
+    </div>
+
+    <div class="text-zone">
+      <div class="eyebrow">STARK LABS</div>
+      <div class="product-name">Mod Manager</div>
+      <div class="tagline">Install once. Play forever.</div>
+      <div class="edition-badge">v3 FORGE EDITION</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Section 3: Mod Cards ── -->
+<div>
+  <div class="label">Mod Card Thumbnails</div>
+  <div id="mod-cards">
+
+    <div class="mod-card card-economy">
+      <div class="card-glow"></div>
+      <div class="top-row">
+        <span class="mod-emoji">💰</span>
+        <span class="label-tag">STARK LABS</span>
+      </div>
+      <div class="bottom-row">
+        <div class="mod-name">Economy Sim</div>
+        <div class="mod-desc">Jobs, bills, markets</div>
+      </div>
+    </div>
+
+    <div class="mod-card card-social">
+      <div class="card-glow"></div>
+      <div class="top-row">
+        <span class="mod-emoji">💬</span>
+        <span class="label-tag">STARK LABS</span>
+      </div>
+      <div class="bottom-row">
+        <div class="mod-name">Social Sim</div>
+        <div class="mod-desc">Cliques, reputation</div>
+      </div>
+    </div>
+
+    <div class="mod-card card-qol">
+      <div class="card-glow"></div>
+      <div class="top-row">
+        <span class="mod-emoji">⚡</span>
+        <span class="label-tag">STARK LABS</span>
+      </div>
+      <div class="bottom-row">
+        <div class="mod-name">QoL Pack</div>
+        <div class="mod-desc">Fixes, UI, speed</div>
+      </div>
+    </div>
+
+    <div class="mod-card card-drama">
+      <div class="card-glow"></div>
+      <div class="top-row">
+        <span class="mod-emoji">🎭</span>
+        <span class="label-tag">STARK LABS</span>
+      </div>
+      <div class="bottom-row">
+        <div class="mod-name">Drama Engine</div>
+        <div class="mod-desc">Storylines, rivalries</div>
+      </div>
+    </div>
+
+    <div class="mod-card card-politics">
+      <div class="card-glow"></div>
+      <div class="top-row">
+        <span class="mod-emoji">🏛️</span>
+        <span class="label-tag">STARK LABS</span>
+      </div>
+      <div class="bottom-row">
+        <div class="mod-name">Political Sim</div>
+        <div class="mod-desc">Elections, policy</div>
+      </div>
+    </div>
+
+    <div class="mod-card card-smart">
+      <div class="card-glow"></div>
+      <div class="top-row">
+        <span class="mod-emoji">🧠</span>
+        <span class="label-tag">STARK LABS</span>
+      </div>
+      <div class="bottom-row">
+        <div class="mod-name">Smart Sims</div>
+        <div class="mod-desc">AI autonomy, pathfinding</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Section 4: DMG Background ── -->
+<div>
+  <div class="label">macOS DMG Background</div>
+  <div id="dmg">
+    <div class="dmg-glow"></div>
+    <div class="dmg-grid"></div>
+    <div class="dmg-top-bar"></div>
+    <div class="dmg-watermark">
+      <svg width="280" height="280" viewBox="0 0 320 320">
+        <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="4"/>
+        <line x1="160" y1="20" x2="160" y2="165" stroke="#4ade80" stroke-width="2"/>
+        <line x1="20" y1="168" x2="300" y2="168" stroke="#4ade80" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <!-- App icon (left) -->
+    <div class="dmg-app-zone" style="position:relative;z-index:2;">
+      <div class="dmg-icon-bg">
+        <div class="glow-bg"></div>
+        <svg width="80" height="80" viewBox="0 0 320 320" style="position:relative;z-index:2;">
+          <polygon points="160,20 20,168 160,165" fill="#1f2d21"/>
+          <polygon points="160,20 160,165 300,168" fill="#1a2520"/>
+          <polygon points="20,168 160,165 160,304" fill="#0d1117"/>
+          <polygon points="160,165 300,168 160,304" fill="#0a0e12"/>
+          <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="3.5" stroke-linejoin="round" opacity="0.9"/>
+          <ellipse cx="160" cy="166" rx="6" ry="4" fill="#4ade80" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="dmg-label">Stark Labs Mod Manager</div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="dmg-arrow" style="position:relative;z-index:2;">
+      <svg width="48" height="20" viewBox="0 0 48 20">
+        <line x1="0" y1="10" x2="36" y2="10" stroke="#484f58" stroke-width="2"/>
+        <polygon points="36,10 24,4 24,16" fill="#484f58"/>
+      </svg>
+    </div>
+
+    <!-- Applications folder (right) -->
+    <div class="dmg-apps-zone" style="position:relative;z-index:2;">
+      <div style="width:96px;height:80px;position:relative;">
+        <!-- Folder shape drawn in CSS/SVG -->
+        <svg width="96" height="80" viewBox="0 0 96 80">
+          <rect x="2" y="20" width="92" height="56" rx="6" fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+          <path d="M2,22 Q2,14 10,14 L40,14 Q48,14 48,22" fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+          <text x="48" y="56" font-family="-apple-system,sans-serif" font-size="9" fill="#484f58" text-anchor="middle">Applications</text>
+        </svg>
+      </div>
+      <div class="dmg-label">Applications</div>
+    </div>
+
+    <div class="dmg-bottom">Stark Labs Mod Manager · Drag to install</div>
+  </div>
+</div>
+
+<!-- ── Section 5: NSIS Installer ── -->
+<div>
+  <div class="label">Windows Installer Graphics</div>
+  <div style="display:flex;gap:32px;align-items:flex-start;">
+
+    <!-- Sidebar -->
+    <div>
+      <div class="label" style="font-size:10px;margin-bottom:12px;">Sidebar (164×314)</div>
+      <div id="nsis-sidebar">
+        <div class="side-glow"></div>
+        <div class="side-strip"></div>
+        <div class="plumbob" style="position:relative;z-index:2;margin-top:0;">
+          <svg width="64" height="64" viewBox="0 0 320 320">
+            <polygon points="160,20 20,168 160,165" fill="#1f2d21"/>
+            <polygon points="160,20 160,165 300,168" fill="#1a2520"/>
+            <polygon points="20,168 160,165 160,304" fill="#0d1117"/>
+            <polygon points="160,165 300,168 160,304" fill="#0a0e12"/>
+            <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="4" opacity="0.85"/>
+            <ellipse cx="160" cy="166" rx="7" ry="5" fill="#4ade80" opacity="0.75"/>
+          </svg>
+        </div>
+        <div class="side-wordmark">STARK LABS</div>
+        <div class="side-sub">Mod Manager</div>
+        <div class="side-divider"></div>
+        <div class="side-badge">v3 FORGE EDITION</div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div>
+      <div class="label" style="font-size:10px;margin-bottom:12px;">Header (497×58)</div>
+      <div id="nsis-header">
+        <div class="header-accent"></div>
+        <svg width="32" height="32" viewBox="0 0 320 320">
+          <polygon points="160,20 20,168 160,165" fill="#1f2d21"/>
+          <polygon points="160,20 160,165 300,168" fill="#1a2520"/>
+          <polygon points="20,168 160,165 160,304" fill="#0d1117"/>
+          <polygon points="160,165 300,168 160,304" fill="#0a0e12"/>
+          <polygon points="160,20 20,168 160,304 300,168" fill="none" stroke="#4ade80" stroke-width="5" opacity="0.85"/>
+          <ellipse cx="160" cy="166" rx="7" ry="5" fill="#4ade80" opacity="0.75"/>
+        </svg>
+        <div class="header-text">
+          <div class="header-brand">STARK LABS</div>
+          <div class="header-sub">Mod Manager — Setup Wizard</div>
+        </div>
+        <div class="header-version">v3 FORGE</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

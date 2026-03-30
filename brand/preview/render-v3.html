@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stark Labs Brand — v3 4K</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0d1117;
+    --bg2:      #161b22;
+    --bg3:      #1c2128;
+    --bg4:      #21262d;
+    --border:   rgba(48,54,61,0.8);
+    --text:     #e6edf3;
+    --muted:    #8b949e;
+    --dim:      #484f58;
+    --green:    #4ade80;
+    --green2:   #22c55e;
+    --green-bg: rgba(74,222,128,0.07);
+    --green-bd: rgba(74,222,128,0.22);
+  }
+
+  body {
+    background: #050810;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Inter', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    width: 3840px; /* 4K */
+  }
+
+  .section-label {
+    color: var(--dim);
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     APP ICON
+  ══════════════════════════════════════════════════════ */
+  .icon-row {
+    display: flex;
+    gap: 48px;
+    align-items: flex-end;
+  }
+
+  .icon-sizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .icon-sizer .sz {
+    color: var(--dim);
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .app-icon {
+    background: var(--bg);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22.37%; /* Apple HIG ratio */
+    overflow: hidden;
+    /* Layered glow system */
+    box-shadow:
+      0 0 0 1.5px rgba(74,222,128,0.18),
+      0 0 40px  rgba(74,222,128,0.22),
+      0 0 100px rgba(74,222,128,0.14),
+      0 0 200px rgba(74,222,128,0.07),
+      0 30px 80px rgba(0,0,0,0.75),
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      inset 0 0 60px rgba(74,222,128,0.03);
+  }
+
+  /* Ambient background glow inside icon */
+  .icon-glow-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 70% at 50% 58%, rgba(74,222,128,0.22) 0%, rgba(74,222,128,0.06) 45%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 52%, rgba(74,222,128,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Diamond SVG sits above glow */
+  .diamond-wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  .icon-monogram {
+    position: absolute;
+    z-index: 3;
+    color: rgba(230,237,243,0.92);
+    font-weight: 800;
+    letter-spacing: -2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Helvetica, Arial, sans-serif;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6), 0 0 40px rgba(74,222,128,0.2);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     SPLASH BANNER
+  ══════════════════════════════════════════════════════ */
+  #splash {
+    width: 2400px;
+    height: 960px;
+    background: var(--bg);
+    border-radius: 32px;
+    border: 1px solid var(--green-bd);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 140px;
+    gap: 120px;
+    box-shadow:
+      0 0 0 1px rgba(74,222,128,0.08),
+      0 0 120px rgba(74,222,128,0.07),
+      0 60px 160px rgba(0,0,0,0.65);
+  }
+
+  .splash-bg-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 25% 50%, rgba(74,222,128,0.1) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 50% at 20% 50%, rgba(74,222,128,0.07) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .splash-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+  }
+
+  .splash-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px;
+    pointer-events: none;
+  }
+
+  .splash-accent-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green2) 30%, transparent 70%);
+    opacity: 0.65;
+  }
+
+  .splash-accent-left {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, transparent, var(--green) 30%, var(--green2) 70%, transparent);
+    opacity: 0.5;
+  }
+
+  .splash-icon-zone {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  .splash-text-zone {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .splash-eyebrow {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: var(--green);
+    opacity: 0.9;
+    text-transform: uppercase;
+  }
+
+  .splash-title {
+    font-size: 96px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+
+  .splash-tagline {
+    font-size: 32px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    margin-top: 4px;
+  }
+
+  .splash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 28px;
+    border: 1px solid var(--green-bd);
+    border-radius: 100px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    width: fit-content;
+    margin-top: 12px;
+    box-shadow:
+      0 0 20px rgba(74,222,128,0.08),
+      inset 0 1px 0 rgba(74,222,128,0.1);
+  }
+
+  .splash-badge-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green), 0 0 20px rgba(74,222,128,0.5);
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     MOD CARDS
+  ══════════════════════════════════════════════════════ */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 340px);
+    gap: 20px;
+  }
+
+  .mod-card {
+    height: 220px;
+    background: var(--bg2);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: all 200ms ease;
+  }
+
+  /* Colored left edge strip */
+  .mod-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+  }
+
+  /* Corner arc highlight */
+  .mod-card::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    opacity: 0.06;
+  }
+
+  .card-wash {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .card-footer {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+  }
+
+  .card-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ── Economy ── */
+  .card-economy::before       { background: #2ea043; }
+  .card-economy { border-color: rgba(46,160,67,0.3); box-shadow: inset 0 0 40px rgba(46,160,67,0.04), 0 4px 24px rgba(0,0,0,0.5); }
+  .card-economy::after        { background: #2ea043; }
+  .card-economy .card-wash    { background: linear-gradient(135deg, rgba(46,160,67,0.16) 0%, transparent 55%); }
+  .card-economy .card-icon-wrap { background: rgba(46,160,67,0.12); border: 1px solid rgba(46,160,67,0.25); }
+
+  /* ── Social ── */
+  .card-social::before        { background: #e05d44; }
+  .card-social { border-color: rgba(224,93,68,0.3); box-shadow: inset 0 0 40px rgba(224,93,68,0.04), 0 4px 24px rgba(0,0,0,0.5); }
+  .card-social::after         { background: #e05d44; }
+  .card-social .card-wash     { background: linear-gradient(135deg, rgba(224,93,68,0.16) 0%, transparent 55%); }
+  .card-social .card-icon-wrap { background: rgba(224,93,68,0.12); border: 1px solid rgba(224,93,68,0.25); }
+
+  /* ── QoL ── */
+  .card-qol::before           { background: #388bfd; }
+  .card-qol { border-color: rgba(56,139,253,0.3); box-shadow: inset 0 0 40px rgba(56,139,253,0.04), 0 4px 24px rgba(0,0,0,0.5); }
+  .card-qol::after            { background: #388bfd; }
+  .card-qol .card-wash        { background: linear-gradient(135deg, rgba(56,139,253,0.16) 0%, transparent 55%); }
+  .card-qol .card-icon-wrap   { background: rgba(56,139,253,0.12); border: 1px solid rgba(56,139,253,0.25); }
+
+  /* ── Drama ── */
+  .card-drama::before         { background: #d4a017; }
+  .card-drama { border-color: rgba(212,160,23,0.3); box-shadow: inset 0 0 40px rgba(212,160,23,0.04), 0 4px 24px rgba(0,0,0,0.5); }
+  .card-drama::after          { background: #d4a017; }
+  .card-drama .card-wash      { background: linear-gradient(135deg, rgba(212,160,23,0.16) 0%, transparent 55%); }
+  .card-drama .card-icon-wrap { background: rgba(212,160,23,0.12); border: 1px solid rgba(212,160,23,0.25); }
+
+  /* ── Politics ── */
+  .card-politics::before         { background: #8957e5; }
+  .card-politics { border-color: rgba(137,87,229,0.3); box-shadow: inset 0 0 40px rgba(137,87,229,0.04), 0 4px 24px rgba(0,0,0,0.5); }
+  .card-politics::after          { background: #8957e5; }
+  .card-politics .card-wash      { background: linear-gradient(135deg, rgba(137,87,229,0.16) 0%, transparent 55%); }
+  .card-politics .card-icon-wrap { background: rgba(137,87,229,0.12); border: 1px solid rgba(137,87,229,0.25); }
+
+  /* ── Smart ── */
+  .card-smart::before         { background: #1f9ada; }
+  .card-smart { border-color: rgba(31,154,218,0.3); box-shadow: inset 0 0 40px rgba(31,154,218,0.04), 0 4px 24px rgba(0,0,0,0.5); }
+  .card-smart::after          { background: #1f9ada; }
+  .card-smart .card-wash      { background: linear-gradient(135deg, rgba(31,154,218,0.16) 0%, transparent 55%); }
+  .card-smart .card-icon-wrap { background: rgba(31,154,218,0.12); border: 1px solid rgba(31,154,218,0.25); }
+
+  /* ══════════════════════════════════════════════════════
+     DMG BACKGROUND
+  ══════════════════════════════════════════════════════ */
+  #dmg {
+    width: 1980px;
+    height: 1200px;
+    background: var(--bg);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 180px;
+    box-shadow: 0 60px 160px rgba(0,0,0,0.65);
+  }
+
+  .dmg-bg-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 45%, rgba(74,222,128,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .dmg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  .dmg-wm {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  .dmg-top-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 10%, var(--green) 40%, var(--green2) 60%, transparent 90%);
+    opacity: 0.45;
+  }
+
+  .dmg-bottom-label {
+    position: absolute;
+    bottom: 48px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .dmg-app-zone, .dmg-folder-zone {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .dmg-icon-shell {
+    width: 280px;
+    height: 280px;
+    background: var(--bg2);
+    border-radius: 64px;
+    border: 1px solid var(--green-bd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 60px rgba(74,222,128,0.14),
+      0 0 120px rgba(74,222,128,0.06),
+      0 30px 80px rgba(0,0,0,0.55);
+  }
+
+  .dmg-icon-shell .icon-glow-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(74,222,128,0.2) 0%, transparent 60%);
+  }
+
+  .dmg-folder-shell {
+    width: 240px;
+    height: 210px;
+    position: relative;
+  }
+
+  .dmg-label-text {
+    font-size: 20px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .dmg-arrow-zone {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     NSIS INSTALLER
+  ══════════════════════════════════════════════════════ */
+  #nsis-sidebar {
+    width: 492px;
+    height: 942px;
+    background: var(--bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 48px 72px;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.65);
+  }
+
+  .sidebar-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 25%, rgba(74,222,128,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .sidebar-strip {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, rgba(74,222,128,0) 0%, var(--green) 20%, var(--green2) 75%, rgba(74,222,128,0) 100%);
+    opacity: 0.8;
+  }
+
+  .sidebar-wordmark {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: var(--text);
+    margin-top: 32px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .sidebar-sub {
+    font-size: 18px;
+    color: var(--muted);
+    margin-top: 8px;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.5px;
+  }
+
+  .sidebar-divider {
+    width: 70%;
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .sidebar-steps {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .sidebar-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid transparent;
+  }
+
+  .sidebar-step.active {
+    background: var(--green-bg);
+    border-color: var(--green-bd);
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .sidebar-step.active .step-num {
+    background: var(--green-bg);
+    border-color: var(--green-bd);
+    color: var(--green);
+  }
+
+  .step-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .sidebar-step.active .step-label { color: var(--text); }
+
+  .sidebar-badge {
+    position: absolute;
+    bottom: 48px;
+    left: 50%; transform: translateX(-50%);
+    padding: 8px 24px;
+    border: 1px solid var(--green-bd);
+    border-radius: 100px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(74,222,128,0.08);
+  }
+
+  #nsis-header {
+    width: 1491px;
+    height: 174px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    gap: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+  }
+
+  .header-accent-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green) 0%, transparent 55%);
+    opacity: 0.65;
+  }
+
+  .header-text { flex: 1; }
+  .header-brand {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+  .header-sub {
+    font-size: 20px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+  .header-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border: 1px solid var(--green-bd);
+    border-radius: 100px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ APP ICON ══════════════════════════════════════════════════════════ -->
+<div>
+  <div class="section-label">App Icon</div>
+  <div class="icon-row">
+
+    <!-- 1024px master -->
+    <div class="icon-sizer">
+      <div class="app-icon" style="width:1024px;height:1024px;">
+        <div class="icon-glow-bg"></div>
+        <div class="diamond-wrap">
+          <svg width="640" height="640" viewBox="0 0 640 640">
+            <defs>
+              <!-- Facet gradients — volumetric feel -->
+              <linearGradient id="ftl" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2e4030"/>
+                <stop offset="50%" stop-color="#1e2c20"/>
+                <stop offset="100%" stop-color="#141a15"/>
+              </linearGradient>
+              <linearGradient id="ftr" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#232e25"/>
+                <stop offset="100%" stop-color="#161d18"/>
+              </linearGradient>
+              <linearGradient id="fbl" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#0d1117"/>
+                <stop offset="100%" stop-color="#141a15"/>
+              </linearGradient>
+              <linearGradient id="fbr" x1="1" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#0a0e12"/>
+                <stop offset="100%" stop-color="#111518"/>
+              </linearGradient>
+              <!-- Green edge glow filter -->
+              <filter id="edge-glow-lg" x="-25%" y="-25%" width="150%" height="150%">
+                <feGaussianBlur stdDeviation="10" result="blur1"/>
+                <feGaussianBlur stdDeviation="4" in="SourceGraphic" result="blur2"/>
+                <feMerge>
+                  <feMergeNode in="blur1"/>
+                  <feMergeNode in="blur2"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <!-- Center gem glow -->
+              <filter id="gem-glow-lg" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="12" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <!-- Outer ambient glow on the full diamond -->
+              <filter id="diamond-ambient" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="20" result="glow"/>
+                <feComposite in="SourceGraphic" in2="glow" operator="over"/>
+              </filter>
+            </defs>
+
+            <!-- Diamond: apex=320,40 left=40,336 bottom=320,608 right=600,336 center=320,330 -->
+
+            <!-- Ambient outer green glow shape -->
+            <polygon points="320,40 40,336 320,608 600,336"
+              fill="rgba(74,222,128,0.04)"
+              filter="url(#diamond-ambient)"/>
+
+            <!-- Facets -->
+            <polygon points="320,40 40,336 320,330"  fill="url(#ftl)"/>
+            <polygon points="320,40 320,330 600,336" fill="url(#ftr)"/>
+            <polygon points="40,336 320,330 320,608" fill="url(#fbl)"/>
+            <polygon points="320,330 600,336 320,608" fill="url(#fbr)"/>
+
+            <!-- Inner facet edge lines — subtle green -->
+            <line x1="320" y1="40" x2="320" y2="330"  stroke="#4ade80" stroke-width="0.8" opacity="0.25"/>
+            <line x1="40"  y1="336" x2="600" y2="336" stroke="#4ade80" stroke-width="0.8" opacity="0.15"/>
+
+            <!-- Primary edge glow — the defining outline -->
+            <polygon points="320,40 40,336 320,608 600,336"
+              fill="none"
+              stroke="#4ade80"
+              stroke-width="2"
+              stroke-linejoin="round"
+              opacity="0.95"
+              filter="url(#edge-glow-lg)"/>
+
+            <!-- Secondary crisp edge — sharp definition -->
+            <polygon points="320,40 40,336 320,608 600,336"
+              fill="none"
+              stroke="rgba(74,222,128,0.6)"
+              stroke-width="1"
+              stroke-linejoin="round"/>
+
+            <!-- Center gem — layered glow -->
+            <ellipse cx="320" cy="332" rx="28" ry="18" fill="#4ade80" opacity="0.1" filter="url(#gem-glow-lg)"/>
+            <ellipse cx="320" cy="332" rx="14" ry="9"  fill="#4ade80" opacity="0.4" filter="url(#gem-glow-lg)"/>
+            <ellipse cx="320" cy="332" rx="6"  ry="4"  fill="#4ade80" opacity="0.95"/>
+
+            <!-- Top facet highlight — catches imaginary light source -->
+            <polygon points="320,40 40,336 320,330"
+              fill="url(#ftl)"
+              opacity="0.3"/>
+          </svg>
+        </div>
+        <!-- SL monogram -->
+        <div class="icon-monogram" style="font-size:128px;top:50%;left:50%;transform:translate(-50%,2%);">SL</div>
+      </div>
+      <span class="sz">1024</span>
+    </div>
+
+    <!-- 256px -->
+    <div class="icon-sizer">
+      <div class="app-icon" style="width:400px;height:400px;box-shadow:0 0 0 1px rgba(74,222,128,0.18),0 0 30px rgba(74,222,128,0.22),0 0 70px rgba(74,222,128,0.12),0 20px 50px rgba(0,0,0,0.7);">
+        <div class="icon-glow-bg"></div>
+        <div class="diamond-wrap">
+          <svg width="250" height="250" viewBox="0 0 640 640">
+            <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+            <polygon points="320,40 320,330 600,336" fill="#192320"/>
+            <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+            <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round" opacity="0.9" filter="url(#edge-glow-lg)"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="rgba(74,222,128,0.5)" stroke-width="1.2" stroke-linejoin="round"/>
+            <ellipse cx="320" cy="332" rx="8" ry="5" fill="#4ade80" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="icon-monogram" style="font-size:48px;top:50%;left:50%;transform:translate(-50%,2%);">SL</div>
+      </div>
+      <span class="sz">256</span>
+    </div>
+
+    <!-- 64px -->
+    <div class="icon-sizer">
+      <div class="app-icon" style="width:120px;height:120px;box-shadow:0 0 0 1px rgba(74,222,128,0.2),0 0 16px rgba(74,222,128,0.25),0 10px 30px rgba(0,0,0,0.7);">
+        <div class="icon-glow-bg"></div>
+        <div class="diamond-wrap">
+          <svg width="72" height="72" viewBox="0 0 640 640">
+            <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+            <polygon points="320,40 320,330 600,336" fill="#192320"/>
+            <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+            <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="4" stroke-linejoin="round" opacity="0.9"/>
+            <ellipse cx="320" cy="332" rx="12" ry="8" fill="#4ade80" opacity="0.85"/>
+          </svg>
+        </div>
+        <div class="icon-monogram" style="font-size:14px;top:50%;left:50%;transform:translate(-50%,2%);">SL</div>
+      </div>
+      <span class="sz">64</span>
+    </div>
+
+    <!-- 32px -->
+    <div class="icon-sizer">
+      <div class="app-icon" style="width:72px;height:72px;box-shadow:0 0 0 1px rgba(74,222,128,0.22),0 0 12px rgba(74,222,128,0.28),0 6px 20px rgba(0,0,0,0.7);">
+        <div class="icon-glow-bg"></div>
+        <div class="diamond-wrap">
+          <svg width="42" height="42" viewBox="0 0 640 640">
+            <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+            <polygon points="320,40 320,330 600,336" fill="#192320"/>
+            <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+            <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="6" stroke-linejoin="round" opacity="0.9"/>
+          </svg>
+        </div>
+      </div>
+      <span class="sz">32</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SPLASH BANNER ══════════════════════════════════════════════════════ -->
+<div>
+  <div class="section-label">Splash / Welcome Screen</div>
+  <div id="splash">
+    <div class="splash-bg-glow"></div>
+    <div class="splash-grid"></div>
+    <div class="splash-noise"></div>
+    <div class="splash-accent-bottom"></div>
+    <div class="splash-accent-left"></div>
+
+    <div class="splash-icon-zone">
+      <div class="app-icon" style="width:400px;height:400px;box-shadow:0 0 0 1px rgba(74,222,128,0.2),0 0 60px rgba(74,222,128,0.2),0 0 120px rgba(74,222,128,0.1),0 30px 80px rgba(0,0,0,0.7);">
+        <div class="icon-glow-bg"></div>
+        <div class="diamond-wrap">
+          <svg width="250" height="250" viewBox="0 0 640 640">
+            <defs>
+              <filter id="sp-edge" x="-25%" y="-25%" width="150%" height="150%">
+                <feGaussianBlur stdDeviation="8" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+            <polygon points="320,40 320,330 600,336" fill="#192320"/>
+            <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+            <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+            <line x1="320" y1="40" x2="320" y2="330"  stroke="#4ade80" stroke-width="1" opacity="0.2"/>
+            <line x1="40"  y1="336" x2="600" y2="336" stroke="#4ade80" stroke-width="1" opacity="0.15"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round" opacity="0.9" filter="url(#sp-edge)"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="rgba(74,222,128,0.55)" stroke-width="1" stroke-linejoin="round"/>
+            <ellipse cx="320" cy="332" rx="10" ry="6" fill="#4ade80" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="icon-monogram" style="font-size:48px;top:50%;left:50%;transform:translate(-50%,2%);">SL</div>
+      </div>
+    </div>
+
+    <div class="splash-text-zone">
+      <div class="splash-eyebrow">Stark Labs</div>
+      <div class="splash-title">Mod Manager</div>
+      <div class="splash-tagline">Install once. Play forever.</div>
+      <div class="splash-badge">
+        <div class="splash-badge-dot"></div>
+        Beta v3*
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MOD CARDS ═════════════════════════════════════════════════════════ -->
+<div>
+  <div class="section-label">Mod Card Components</div>
+  <div class="cards-grid">
+
+    <!-- Economy Sim -->
+    <div class="mod-card card-economy">
+      <div class="card-wash"></div>
+      <div class="card-header">
+        <div class="card-icon-wrap">
+          <!-- Custom SVG: Coin stack / currency -->
+          <svg width="38" height="38" viewBox="0 0 30 30" fill="none">
+            <ellipse cx="15" cy="8"  rx="10" ry="4" fill="none" stroke="#2ea043" stroke-width="1.5"/>
+            <path d="M5 8 v6 c0 2.2 4.5 4 10 4 s10-1.8 10-4 V8" fill="none" stroke="#2ea043" stroke-width="1.5"/>
+            <ellipse cx="15" cy="14" rx="10" ry="4" fill="none" stroke="#2ea043" stroke-width="1.5"/>
+            <path d="M5 14 v5 c0 2.2 4.5 4 10 4 s10-1.8 10-4 v-5" fill="none" stroke="#2ea043" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="card-tag">Stark Labs</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-name">Economy Sim</div>
+        <div class="card-desc">Jobs, bills, markets, wealth</div>
+      </div>
+    </div>
+
+    <!-- Social Sim -->
+    <div class="mod-card card-social">
+      <div class="card-wash"></div>
+      <div class="card-header">
+        <div class="card-icon-wrap">
+          <!-- Custom SVG: Network nodes / social graph -->
+          <svg width="38" height="38" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="7"  r="3.5" stroke="#e05d44" stroke-width="1.5"/>
+            <circle cx="6"  cy="22" r="3"   stroke="#e05d44" stroke-width="1.5"/>
+            <circle cx="24" cy="22" r="3"   stroke="#e05d44" stroke-width="1.5"/>
+            <line x1="15" y1="10.5" x2="8"  y2="19.2" stroke="#e05d44" stroke-width="1.2" stroke-opacity="0.7"/>
+            <line x1="15" y1="10.5" x2="22" y2="19.2" stroke="#e05d44" stroke-width="1.2" stroke-opacity="0.7"/>
+            <line x1="9"  y1="22"   x2="21" y2="22"   stroke="#e05d44" stroke-width="1.2" stroke-opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-tag">Stark Labs</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-name">Social Sim</div>
+        <div class="card-desc">Cliques, reputation, dynamics</div>
+      </div>
+    </div>
+
+    <!-- QoL Pack -->
+    <div class="mod-card card-qol">
+      <div class="card-wash"></div>
+      <div class="card-header">
+        <div class="card-icon-wrap">
+          <!-- Custom SVG: Tuning sliders -->
+          <svg width="38" height="38" viewBox="0 0 30 30" fill="none">
+            <line x1="4" y1="9"  x2="26" y2="9"  stroke="#388bfd" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="4" y1="15" x2="26" y2="15" stroke="#388bfd" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="4" y1="21" x2="26" y2="21" stroke="#388bfd" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="10" cy="9"  r="3" fill="#0d1117" stroke="#388bfd" stroke-width="1.5"/>
+            <circle cx="20" cy="15" r="3" fill="#0d1117" stroke="#388bfd" stroke-width="1.5"/>
+            <circle cx="13" cy="21" r="3" fill="#0d1117" stroke="#388bfd" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="card-tag">Stark Labs</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-name">QoL Pack</div>
+        <div class="card-desc">Fixes, UI improvements, speed</div>
+      </div>
+    </div>
+
+    <!-- Drama Engine -->
+    <div class="mod-card card-drama">
+      <div class="card-wash"></div>
+      <div class="card-header">
+        <div class="card-icon-wrap">
+          <!-- Custom SVG: Narrative arc / story wave -->
+          <svg width="38" height="38" viewBox="0 0 30 30" fill="none">
+            <!-- Story arc path -->
+            <path d="M3 22 C6 22 7 10 10 10 C13 10 14 18 17 18 C20 18 21 8 24 6 C26 5 27 8 27 8"
+              stroke="#d4a017" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <!-- Climax dot -->
+            <circle cx="24" cy="6" r="2.5" fill="#d4a017" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="card-tag">Stark Labs</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-name">Drama Engine</div>
+        <div class="card-desc">Storylines, arcs, rivalries</div>
+      </div>
+    </div>
+
+    <!-- Political Sim -->
+    <div class="mod-card card-politics">
+      <div class="card-wash"></div>
+      <div class="card-header">
+        <div class="card-icon-wrap">
+          <!-- Custom SVG: Columns / ballot -->
+          <svg width="38" height="38" viewBox="0 0 30 30" fill="none">
+            <!-- Base -->
+            <rect x="3" y="24" width="24" height="2.5" rx="1.2" fill="#8957e5" opacity="0.8"/>
+            <!-- Columns -->
+            <rect x="6"  y="10" width="4" height="14" rx="1" fill="none" stroke="#8957e5" stroke-width="1.5"/>
+            <rect x="13" y="7"  width="4" height="17" rx="1" fill="none" stroke="#8957e5" stroke-width="1.5"/>
+            <rect x="20" y="13" width="4" height="11" rx="1" fill="none" stroke="#8957e5" stroke-width="1.5"/>
+            <!-- Pediment -->
+            <path d="M3 10 L15 4 L27 10" stroke="#8957e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="card-tag">Stark Labs</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-name">Political Sim</div>
+        <div class="card-desc">Elections, parties, policy</div>
+      </div>
+    </div>
+
+    <!-- Smart Sims -->
+    <div class="mod-card card-smart">
+      <div class="card-wash"></div>
+      <div class="card-header">
+        <div class="card-icon-wrap">
+          <!-- Custom SVG: Neural net / AI nodes -->
+          <svg width="38" height="38" viewBox="0 0 30 30" fill="none">
+            <!-- Layer 1 nodes -->
+            <circle cx="5"  cy="10" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/>
+            <circle cx="5"  cy="20" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/>
+            <!-- Layer 2 nodes -->
+            <circle cx="15" cy="7"  r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/>
+            <circle cx="15" cy="15" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/>
+            <circle cx="15" cy="23" r="2.5" stroke="#1f9ada" stroke-width="1.5" fill="none"/>
+            <!-- Layer 3 node -->
+            <circle cx="25" cy="15" r="2.5" fill="#1f9ada" opacity="0.9"/>
+            <!-- Connections -->
+            <line x1="7.5" y1="10" x2="12.5" y2="7"  stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/>
+            <line x1="7.5" y1="10" x2="12.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/>
+            <line x1="7.5" y1="10" x2="12.5" y2="23" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.3"/>
+            <line x1="7.5" y1="20" x2="12.5" y2="7"  stroke="#1f9ada" stroke-width="1" stroke-opacity="0.3"/>
+            <line x1="7.5" y1="20" x2="12.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/>
+            <line x1="7.5" y1="20" x2="12.5" y2="23" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.5"/>
+            <line x1="17.5" y1="7"  x2="22.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.6"/>
+            <line x1="17.5" y1="15" x2="22.5" y2="15" stroke="#1f9ada" stroke-width="1.5" stroke-opacity="0.8"/>
+            <line x1="17.5" y1="23" x2="22.5" y2="15" stroke="#1f9ada" stroke-width="1" stroke-opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="card-tag">Stark Labs</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-name">Smart Sims</div>
+        <div class="card-desc">AI autonomy, smarter decisions</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ DMG BACKGROUND ════════════════════════════════════════════════════ -->
+<div>
+  <div class="section-label">macOS DMG Installer Background</div>
+  <div id="dmg">
+    <div class="dmg-bg-glow"></div>
+    <div class="dmg-grid"></div>
+    <div class="dmg-wm">
+      <svg width="700" height="700" viewBox="0 0 640 640">
+        <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="3"/>
+        <line x1="320" y1="40" x2="320" y2="330" stroke="#4ade80" stroke-width="1.5"/>
+        <line x1="40" y1="336" x2="600" y2="336" stroke="#4ade80" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="dmg-top-accent"></div>
+
+    <!-- App icon -->
+    <div class="dmg-app-zone">
+      <div class="dmg-icon-shell">
+        <div class="icon-glow-bg"></div>
+        <svg width="160" height="160" viewBox="0 0 640 640" style="position:relative;z-index:2;">
+          <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+          <polygon points="320,40 320,330 600,336" fill="#192320"/>
+          <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+          <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+          <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="3.5" stroke-linejoin="round" opacity="0.9"/>
+          <ellipse cx="320" cy="332" rx="14" ry="9" fill="#4ade80" opacity="0.85"/>
+        </svg>
+      </div>
+      <div class="dmg-label-text">Stark Labs Mod Manager</div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="dmg-arrow-zone">
+      <svg width="120" height="40" viewBox="0 0 120 40">
+        <defs>
+          <linearGradient id="arrow-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#484f58" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#484f58"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="20" x2="90" y2="20" stroke="url(#arrow-grad)" stroke-width="2"/>
+        <polygon points="90,20 72,10 72,30" fill="#484f58"/>
+      </svg>
+    </div>
+
+    <!-- Applications folder -->
+    <div class="dmg-folder-zone">
+      <svg width="200" height="170" viewBox="0 0 200 170">
+        <rect x="4" y="44" width="192" height="120" rx="14" fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+        <path d="M4,55 Q4,28 18,28 L70,28 Q84,28 90,44 L196,44 Q196,44 196,55" fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+        <text x="100" y="115" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="16" fill="#484f58" text-anchor="middle" letter-spacing="0.5">Applications</text>
+      </svg>
+      <div class="dmg-label-text">Applications</div>
+    </div>
+
+    <div class="dmg-bottom-label">Stark Labs Mod Manager · Drag to install</div>
+  </div>
+</div>
+
+<!-- ══ NSIS INSTALLER ════════════════════════════════════════════════════ -->
+<div>
+  <div class="section-label">Windows Installer</div>
+  <div style="display:flex;gap:60px;align-items:flex-start;">
+
+    <!-- Sidebar -->
+    <div>
+      <div style="color:var(--dim);font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;">Sidebar — 164×314</div>
+      <div id="nsis-sidebar">
+        <div class="sidebar-glow"></div>
+        <div class="sidebar-strip"></div>
+
+        <!-- Diamond icon -->
+        <div style="position:relative;z-index:2;">
+          <svg width="100" height="100" viewBox="0 0 640 640">
+            <defs>
+              <filter id="sb-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="12" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+            <polygon points="320,40 320,330 600,336" fill="#192320"/>
+            <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+            <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="3" stroke-linejoin="round" opacity="0.9" filter="url(#sb-glow)"/>
+            <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="rgba(74,222,128,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+            <ellipse cx="320" cy="332" rx="12" ry="8" fill="#4ade80" opacity="0.85"/>
+          </svg>
+        </div>
+
+        <div class="sidebar-wordmark">STARK LABS</div>
+        <div class="sidebar-sub">Mod Manager</div>
+        <div class="sidebar-divider"></div>
+
+        <!-- Install steps -->
+        <div class="sidebar-steps">
+          <div class="sidebar-step active">
+            <div class="step-num">1</div>
+            <div class="step-label">Welcome</div>
+          </div>
+          <div class="sidebar-step">
+            <div class="step-num">2</div>
+            <div class="step-label">Select Mods</div>
+          </div>
+          <div class="sidebar-step">
+            <div class="step-num">3</div>
+            <div class="step-label">Install</div>
+          </div>
+          <div class="sidebar-step">
+            <div class="step-num">4</div>
+            <div class="step-label">Finish</div>
+          </div>
+        </div>
+
+        <div class="sidebar-badge">Beta v3*</div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div>
+      <div style="color:var(--dim);font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;">Header — 497×58</div>
+      <div id="nsis-header">
+        <div class="header-accent-bottom"></div>
+        <!-- Diamond micro icon -->
+        <svg width="44" height="44" viewBox="0 0 640 640" style="flex-shrink:0;">
+          <polygon points="320,40 40,336 320,330"  fill="#1f2d21"/>
+          <polygon points="320,40 320,330 600,336" fill="#192320"/>
+          <polygon points="40,336 320,330 320,608" fill="#0d1117"/>
+          <polygon points="320,330 600,336 320,608" fill="#0a0e12"/>
+          <polygon points="320,40 40,336 320,608 600,336" fill="none" stroke="#4ade80" stroke-width="5" stroke-linejoin="round" opacity="0.88"/>
+          <ellipse cx="320" cy="332" rx="16" ry="10" fill="#4ade80" opacity="0.85"/>
+        </svg>
+        <div class="header-text">
+          <div class="header-brand">STARK LABS</div>
+          <div class="header-sub">Mod Manager — Setup Wizard</div>
+        </div>
+        <div class="header-badge">
+          <div class="splash-badge-dot" style="width:7px;height:7px;"></div>
+          Beta v3*
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

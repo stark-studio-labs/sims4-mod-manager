@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 400" width="660" height="400">
+  <defs>
+    <radialGradient id="dmg-glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Watermark gradient for Plumbob -->
+    <linearGradient id="wm-facet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6edf3" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#e6edf3" stop-opacity="0.01"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="660" height="400" fill="#0d1117"/>
+  <rect width="660" height="400" fill="url(#dmg-glow)"/>
+
+  <!-- Watermark Plumbob (center, ghosted at ~6% opacity) -->
+  <g transform="translate(230, 60)" opacity="0.06">
+    <polygon points="100,10 10,110 100,200 190,110" fill="none" stroke="#4ade80" stroke-width="3"/>
+    <line x1="100" y1="10" x2="100" y2="110" stroke="#4ade80" stroke-width="1.5"/>
+    <line x1="10" y1="110" x2="190" y2="110" stroke="#4ade80" stroke-width="1.5"/>
+  </g>
+
+  <!-- ── App icon zone (left) ── -->
+  <!-- Placeholder circle represents dropped app icon at 160×160 -->
+  <g transform="translate(115, 100)">
+    <!-- Icon drop shadow suggestion -->
+    <ellipse cx="80" cy="175" rx="60" ry="10" fill="#000" opacity="0.35"/>
+    <!-- Icon background (dark rounded square at 160px) -->
+    <rect x="0" y="0" width="160" height="160" rx="36" fill="#161b22"
+          stroke="#4ade80" stroke-width="1.5" stroke-opacity="0.4"/>
+    <!-- Mini Plumbob inside icon placeholder -->
+    <polygon points="80,28 20,88 80,148 140,88" fill="none" stroke="#4ade80" stroke-width="2" opacity="0.7"/>
+    <line x1="80" y1="28" x2="80" y2="88" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+    <line x1="20" y1="88" x2="140" y2="88" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+    <ellipse cx="80" cy="90" rx="7" ry="5" fill="#4ade80" opacity="0.6"/>
+  </g>
+
+  <!-- Arrow pointing right (center) -->
+  <g transform="translate(295, 156)">
+    <line x1="0" y1="24" x2="60" y2="24" stroke="#484f58" stroke-width="2"/>
+    <polygon points="60,24 46,16 46,32" fill="#484f58"/>
+  </g>
+
+  <!-- ── Applications folder zone (right) ── -->
+  <g transform="translate(383, 100)">
+    <!-- Folder shape -->
+    <rect x="0" y="20" width="160" height="120" rx="8" fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+    <rect x="0" y="20" width="70" height="18" rx="6" fill="#21262d"/>
+    <!-- Tab top -->
+    <path d="M0,20 Q0,12 8,12 L62,12 Q70,12 70,20" fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+    <text x="80" y="88" font-family="-apple-system, Helvetica, Arial, sans-serif"
+          font-size="11" font-weight="500" fill="#8b949e" text-anchor="middle">Applications</text>
+  </g>
+
+  <!-- ── Wordmark bottom center ── -->
+  <text x="330" y="358"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="13" font-weight="600" letter-spacing="2"
+        fill="#484f58" text-anchor="middle">STARK LABS MOD MANAGER</text>
+
+  <!-- Top accent line -->
+  <line x1="0" y1="0" x2="660" y2="0" stroke="#4ade80" stroke-width="2" stroke-opacity="0.5"/>
+</svg>
