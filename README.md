@@ -1,6 +1,6 @@
 <div align="center">
 
-# sims4-mod-manager
+# 📦 sims4-mod-manager
 
 **The mod manager The Sims 4 has always needed.**
 
@@ -14,7 +14,50 @@
 
 ---
 
-## What It Does
+## 🌐 Stark Labs Ecosystem
+
+> Everything we build for The Sims 4 modding community — open source, interconnected, and community-driven.
+
+| Repo | What It Does | Status |
+|------|-------------|--------|
+| 📚 **[awesome-sims4-mods](https://github.com/stark-studio-labs/awesome-sims4-mods)** | Curated mod directory with compatibility tracking | ![Active](https://img.shields.io/badge/-active-brightgreen) |
+| 🧱 **[sims4-stark-framework](https://github.com/stark-studio-labs/sims4-stark-framework)** | Modern typed modding framework (replaces S4CL patterns) | ![Active](https://img.shields.io/badge/-active-brightgreen) |
+| 🔧 **[sims4-stark-devkit](https://github.com/stark-studio-labs/sims4-stark-devkit)** | CLI toolkit — decompile, package, scaffold, test | ![Active](https://img.shields.io/badge/-active-brightgreen) |
+| 📦 **[sims4-mod-manager](https://github.com/stark-studio-labs/sims4-mod-manager)** | Scan, organize, and detect conflicts in your mod collection | ![Alpha](https://img.shields.io/badge/-alpha-orange) |
+| 🎨 **[sims4-mod-builder](https://github.com/stark-studio-labs/sims4-mod-builder)** | Visual mod creation tool — no XML knowledge needed | ![In Dev](https://img.shields.io/badge/-in%20dev-yellow) |
+| 🔬 **[sims4-mod-revival](https://github.com/stark-studio-labs/sims4-mod-revival)** | Decompile and revive abandoned community mods | ![Active](https://img.shields.io/badge/-active-brightgreen) |
+| 💰 **[sims4-economy-sim](https://github.com/stark-studio-labs/sims4-economy-sim)** | Banking, bills, jobs, and stock market overhaul mod | ![Pre-Alpha](https://img.shields.io/badge/-pre--alpha-red) |
+
+---
+
+## 📖 Table of Contents
+
+- [😤 The Problem](#-the-problem)
+- [🔍 What It Does](#-what-it-does)
+- [🚀 Quick Start](#-quick-start)
+- [📋 Features](#-features)
+- [📥 Install](#-install)
+- [⚡ Commands](#-commands)
+- [🏗️ Architecture](#️-architecture)
+- [💥 How Conflict Detection Works](#-how-conflict-detection-works)
+- [🔬 Development](#-development)
+- [🗺️ Roadmap](#️-roadmap)
+
+---
+
+## 😤 The Problem
+
+- You have **200+ mods** and the game just crashes. Which one broke? 🤷
+- Two mods override the **same interaction** — but you only find out when behavior is wrong
+- Unzipping mods into the right folder is **tedious and error-prone**
+- After a game update, you need to **check every mod manually** for compatibility
+- There's no good way to **disable a mod temporarily** without deleting it
+
+This tool fixes all of that.
+
+---
+
+## 🔍 What It Does
 
 A Python CLI tool that scans, organizes, and manages your Sims 4 mod collection. Built on a real DBPF v2.0 parser that reads `.package` files at the binary level to detect conflicts before they crash your game.
 
@@ -40,16 +83,38 @@ Scanning: ~/Documents/Electronic Arts/The Sims 4/Mods/
 Summary: 47 active, 3 disabled, 412 MB total
 ```
 
-## Features
+---
 
-- **Scan** -- recursively finds all `.package` and `.ts4script` mods with resource counts and metadata
-- **List** -- filter by type, sort by name/size/date
-- **Enable/Disable** -- toggle mods without deleting them (moves to `_disabled/` subfolder)
-- **Conflict Detection** -- parses DBPF index tables to find resource key collisions (same type+group+instance ID across multiple mods), classified by severity (high/medium/low)
-- **Install** -- extract mods from `.zip` files directly into your Mods folder
-- **Info** -- detailed view of any mod (resources, path, size, status)
+## 🚀 Quick Start
 
-## Install
+```bash
+# Install
+pip install -e .
+
+# See what's in your Mods folder
+s4mm scan
+
+# Check for conflicts between mods
+s4mm conflicts
+
+# Disable a broken mod without deleting it
+s4mm disable "BrokenMod"
+```
+
+---
+
+## 📋 Features
+
+- **🔍 Scan** -- recursively finds all `.package` and `.ts4script` mods with resource counts and metadata
+- **📃 List** -- filter by type, sort by name/size/date
+- **🔀 Enable/Disable** -- toggle mods without deleting them (moves to `_disabled/` subfolder)
+- **💥 Conflict Detection** -- parses DBPF index tables to find resource key collisions (same type+group+instance ID across multiple mods), classified by severity (high/medium/low)
+- **📥 Install** -- extract mods from `.zip` files directly into your Mods folder
+- **ℹ️ Info** -- detailed view of any mod (resources, path, size, status)
+
+---
+
+## 📥 Install
 
 ```bash
 pip install -e .
@@ -58,7 +123,9 @@ pip install -e .
 python -m sims4_mod_manager.cli scan
 ```
 
-## Commands
+---
+
+## ⚡ Commands
 
 | Command | Description |
 |---------|-------------|
@@ -73,7 +140,9 @@ python -m sims4_mod_manager.cli scan
 
 All commands accept `--mods-dir /path/to/Mods` to override auto-detection.
 
-## Architecture
+---
+
+## 🏗️ Architecture
 
 ```
 sims4_mod_manager/
@@ -83,15 +152,19 @@ sims4_mod_manager/
   cli.py        -- Rich TUI CLI (click + rich)
 ```
 
-### How Conflict Detection Works
+---
+
+### 💥 How Conflict Detection Works
 
 Every `.package` file is a DBPF container with an index table mapping resources by `(type_id, group_id, instance_id)`. When two mods contain entries with the same key, the game loads the last one -- silently overriding the first. This tool detects those collisions and classifies them:
 
-- **High** -- tuning overrides (interactions, traits, buffs, objects, careers) that change gameplay
-- **Medium** -- string tables and SimData that may cause text glitches
-- **Low** -- meshes, textures, animations (visual only, last-loaded wins)
+- 🔴 **High** -- tuning overrides (interactions, traits, buffs, objects, careers) that change gameplay
+- 🟡 **Medium** -- string tables and SimData that may cause text glitches
+- 🟢 **Low** -- meshes, textures, animations (visual only, last-loaded wins)
 
-## Development
+---
+
+## 🔬 Development
 
 ```bash
 # Install with dev dependencies
@@ -104,19 +177,23 @@ pytest tests/ -v
 pytest tests/test_parser.py -v
 ```
 
-## Roadmap
+---
 
-- [ ] Auto-update detection (check mod sources for new versions)
-- [ ] Mod profiles (switch between mod sets)
-- [ ] Pre-install conflict scan
-- [ ] Dependency resolution (detect missing XML Injector, S4CL, etc.)
-- [ ] Web/TUI dashboard
-- [ ] CurseForge API integration
+## 🗺️ Roadmap
+
+- [ ] 🔄 Auto-update detection (check mod sources for new versions)
+- [ ] 🎭 Mod profiles (switch between mod sets)
+- [ ] 🛡️ Pre-install conflict scan
+- [ ] 🔗 Dependency resolution (detect missing XML Injector, S4CL, etc.)
+- [ ] 🖥️ Web/TUI dashboard
+- [ ] 🌐 CurseForge API integration
 
 ---
 
 <div align="center">
 
-**Built by [Stark Studio Labs](https://github.com/stark-studio-labs)**
+**Built with 💜 by [Stark Studio Labs](https://github.com/stark-studio-labs)**
+
+*Making The Sims 4 modding less painful, one tool at a time.*
 
 </div>
