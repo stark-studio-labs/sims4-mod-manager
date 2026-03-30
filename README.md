@@ -1,121 +1,122 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/stark-studio-labs/.github/main/assets/stark-labs-banner.svg" alt="Stark Studio Labs" width="100%">
-
 # sims4-mod-manager
 
-**The mod manager The Sims 4 has always needed — but never had.**
+**The mod manager The Sims 4 has always needed.**
 
-[![Status](https://img.shields.io/badge/status-in%20development-orange)](https://github.com/stark-studio-labs/sims4-mod-manager)
+[![Status](https://img.shields.io/badge/status-alpha-orange)](https://github.com/stark-studio-labs/sims4-mod-manager)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-42%20passed-brightgreen)]()
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)]()
 [![Made by Stark Studio Labs](https://img.shields.io/badge/made%20by-Stark%20Studio%20Labs-blueviolet)](https://github.com/stark-studio-labs)
-
-*Built by [Stark Studio Labs](https://github.com/stark-studio-labs)*
 
 </div>
 
 ---
 
-## What Is This?
+## What It Does
 
-**sims4-mod-manager** is a desktop application for managing your Sims 4 mod collection. Install mods from a URL, track updates automatically, detect conflicts before they crash your game, and switch between curated mod profiles without moving files around by hand.
+A Python CLI tool that scans, organizes, and manages your Sims 4 mod collection. Built on a real DBPF v2.0 parser that reads `.package` files at the binary level to detect conflicts before they crash your game.
 
-The Sims 4 modding community is massive — tens of thousands of mods, spread across Patreon, itch.io, CurseForge, ModTheSims, and personal creator sites. There has never been a single tool that handles installation, updates, and conflict detection across all of those sources. That's what this is.
+```
+$ s4mm scan
 
----
+ ____  _                _  _    __  __           _
+/ ___|(_)_ __ ___  ___ | || |  |  \/  | ___   __| |
+\___ \| | '_ ` _ \/ __|| || |_ | |\/| |/ _ \ / _` |
+ ___) | | | | | | \__ \|__   _|| |  | | (_) | (_| |
+|____/|_|_| |_| |_|___/   |_|  |_|  |_|\___/ \__,_|
+                                    Manager v0.1.0
 
-## Why This Exists
+Scanning: ~/Documents/Electronic Arts/The Sims 4/Mods/
 
-Every existing Sims 4 mod management solution has the same problem: it doesn't actually manage mods.
+            Active Mods (47)
+ Name                  Type        Size  Resources  Modified
+ basemental_drugs      .package    85 MB     3,412  2026-03-15
+ mc_cmd_center         .ts4script  12 MB         -  2026-03-20
+ ui_cheats_extension   .package     2 MB       156  2026-03-18
+ ...
 
-| Tool | What It Does | What It Misses |
-|------|-------------|----------------|
-| Manual file management | Copy `.package` files into `Mods/` | No update tracking, no conflict detection |
-| Mod Organizer 2 | Excellent for Bethesda games | Not built for Sims 4's XML/Python mod structure |
-| Vortex (Nexus) | Handles NexusMods releases | Most Sims 4 mods aren't on Nexus |
-| CurseForge app | Works for CurseForge-hosted mods | Covers ~5% of Sims 4 mods |
-| TS4 Mod Conflict Detector | Detects conflicts post-install | Read-only, no management features |
+Summary: 47 active, 3 disabled, 412 MB total
+```
 
-sims4-mod-manager is built specifically for The Sims 4's ecosystem — multiple distribution sources, `.package`/`.ts4script` structure, EA patch-driven breakage cycles, and the community's Patreon-first distribution model.
+## Features
 
----
+- **Scan** -- recursively finds all `.package` and `.ts4script` mods with resource counts and metadata
+- **List** -- filter by type, sort by name/size/date
+- **Enable/Disable** -- toggle mods without deleting them (moves to `_disabled/` subfolder)
+- **Conflict Detection** -- parses DBPF index tables to find resource key collisions (same type+group+instance ID across multiple mods), classified by severity (high/medium/low)
+- **Install** -- extract mods from `.zip` files directly into your Mods folder
+- **Info** -- detailed view of any mod (resources, path, size, status)
 
-## Features (Coming)
+## Install
 
-### Core Management
-- **Install from URL** — paste any download link (itch.io, Patreon, CurseForge, personal sites) and the manager handles the rest: download, extract, move to `Mods/`, register
-- **Auto-update detection** — monitors mod sources and notifies you when creators release updates; one-click update without manual re-download
-- **Mod profiles** — create named mod sets (e.g., "Storytelling Build", "Minimal Gameplay", "Full Install") and switch between them without moving files; great for testing or different playstyles
-- **One-click backup** — snapshot your entire mod folder before an EA patch drops, restore with one click if something breaks
+```bash
+pip install -e .
 
-### Conflict Detection
-- **Pre-install conflict scan** — before installing a new mod, check whether it overwrites tuning files already modified by an installed mod
-- **Batch conflict audit** — scan your entire `Mods/` folder and surface all conflicts with explanations of what each conflict affects
-- **Dependency resolution** — identifies when a mod requires XML Injector, Sims4CommunityLibrary, or another framework, and installs the dependency if missing
-- **Post-patch impact report** — after an EA update, show which installed mods are likely affected based on the patch notes
+# Or just run directly:
+python -m sims4_mod_manager.cli scan
+```
 
-### Organization
-- **Tag-based filtering** — tag mods by category (gameplay, CC, QoL, NSFW, etc.) and filter your library instantly
-- **Creator tracking** — follow creators and see all their mods in one place; get notified when they release something new
-- **Mod notes** — attach personal notes to mods ("breaks with Slice of Life", "need to configure on first run")
-- **Bulk enable/disable** — toggle mods without deleting them, useful for isolating issues
+## Commands
 
-### Intelligence
-- **Community status feed** — pulls from SimsVIP and community patch trackers to surface which of your installed mods are broken after the latest EA patch
-- **Load time estimator** — estimates game load time impact as you add mods
-- **Duplicate detector** — flags when you have two copies of the same mod (common after re-downloads)
+| Command | Description |
+|---------|-------------|
+| `s4mm scan` | Full scan with rich table output |
+| `s4mm list --type package --sort size` | Filtered, sorted list |
+| `s4mm disable ModName` | Move mod to `_disabled/` |
+| `s4mm enable ModName` | Restore from `_disabled/` |
+| `s4mm conflicts` | Scan for resource conflicts with severity report |
+| `s4mm install path/to/mod.zip` | Extract and install from ZIP |
+| `s4mm info ModName` | Detailed mod info |
+| `s4mm status` | Quick overview |
 
----
+All commands accept `--mods-dir /path/to/Mods` to override auto-detection.
 
-## How It Differs From Manual Management
+## Architecture
 
-If you've been managing mods by hand, here's what changes:
+```
+sims4_mod_manager/
+  parser.py     -- DBPF v2.0 binary parser (reads .package index tables)
+  manager.py    -- Mod scanner, enable/disable, ZIP installer
+  conflicts.py  -- Resource conflict detection with severity classification
+  cli.py        -- Rich TUI CLI (click + rich)
+```
 
-**Before (manual):**
-1. Find a mod on Patreon or itch.io
-2. Download a `.zip` file
-3. Open the zip, find the `.package` files
-4. Navigate to `Documents/Electronic Arts/The Sims 4/Mods/`
-5. Create a subfolder
-6. Move the files
-7. Repeat for each update, forever
-8. If something breaks after a patch, guess which of your 200+ mods is the problem
+### How Conflict Detection Works
 
-**After (sims4-mod-manager):**
-1. Paste the download URL
-2. Done
-3. When there's an update, click Update
-4. When something breaks, run the conflict scan
+Every `.package` file is a DBPF container with an index table mapping resources by `(type_id, group_id, instance_id)`. When two mods contain entries with the same key, the game loads the last one -- silently overriding the first. This tool detects those collisions and classifies them:
 
----
+- **High** -- tuning overrides (interactions, traits, buffs, objects, careers) that change gameplay
+- **Medium** -- string tables and SimData that may cause text glitches
+- **Low** -- meshes, textures, animations (visual only, last-loaded wins)
 
-## Technical Approach
+## Development
 
-- **Platform:** Electron + React (cross-platform desktop: Windows, Mac)
-- **Mod parsing:** Direct `.package` file parsing to extract tuning XML — no reliance on game files
-- **Source connectors:** Pluggable source adapters for each distribution platform (Patreon, itch.io, CurseForge, ModTheSims, direct URL)
-- **Storage:** Local SQLite database for mod registry, no cloud dependency
-- **Conflict detection:** XML tuning file comparison at the instance/resource key level — the same approach used by TS4 Mod Conflict Detector, extended with resolution suggestions
+```bash
+# Install with dev dependencies
+pip install -e ".[dev]"
 
----
+# Run tests (42 tests)
+pytest tests/ -v
 
-## Status
+# Run a specific test module
+pytest tests/test_parser.py -v
+```
 
-In active development. No release date yet.
+## Roadmap
 
-Follow [Stark Studio Labs](https://github.com/stark-studio-labs) for updates. If you want to contribute or have feature requests, open an issue.
-
----
-
-## Related Projects
-
-- [awesome-sims4-mods](https://github.com/stark-studio-labs/awesome-sims4-mods) — Curated mod directory
-- [sims4-mod-builder](https://github.com/stark-studio-labs/sims4-mod-builder) — Visual mod creation tool
+- [ ] Auto-update detection (check mod sources for new versions)
+- [ ] Mod profiles (switch between mod sets)
+- [ ] Pre-install conflict scan
+- [ ] Dependency resolution (detect missing XML Injector, S4CL, etc.)
+- [ ] Web/TUI dashboard
+- [ ] CurseForge API integration
 
 ---
 
 <div align="center">
 
-**Built with 💚 by [Stark Studio Labs](https://github.com/stark-studio-labs)**
+**Built by [Stark Studio Labs](https://github.com/stark-studio-labs)**
 
 </div>
