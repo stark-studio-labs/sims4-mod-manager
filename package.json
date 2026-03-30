@@ -1,7 +1,7 @@
 {
   "name": "sims4-mod-manager",
   "productName": "Stark Labs Mod Manager",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "One-click installer for Stark Labs Sims 4 mods. Auto-detects your game, installs mods, enables scripts, checks for updates.",
   "main": "src/main/main.js",
   "author": {
